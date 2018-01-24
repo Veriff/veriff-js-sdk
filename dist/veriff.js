@@ -154,12 +154,11 @@ var createSession = __webpack_require__(5);
 
 var Veriff = function Veriff(apiKey) {
   var opts = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
-  var person = opts.person,
-      features = opts.features;
+  var features = opts.features;
 
   return {
     apiKey: apiKey,
-    person: person,
+    person: {},
     features: features,
     env: 'production',
     setOptions: function setOptions(_ref) {
@@ -196,9 +195,17 @@ var Veriff = function Veriff(apiKey) {
         _this.setOptions({ person: { givenName: givenName, lastName: lastName } });
         var data = {
           person: _this.person,
-          features: _this.features
+          features: _this.features,
+          env: _this.env
         };
-        createSession(_this.apiKey, data, _this.env);
+        createSession(_this.apiKey, data, function (response) {
+          if (response.readyState == 4 && response.status == "201") {
+            var _data = JSON.parse(response.responseText);
+            window.location.href = _data.verification.url;
+          } else {
+            throw new Error(response.status);
+          }
+        });
       };
     }
   };
@@ -332,25 +339,24 @@ var API_URL = {
   production: 'http://magic.veriff.me/v1/sessions'
 };
 
-var createSession = function createSession(apiKey, data, env) {
+var createSession = function createSession(apiKey, data, cb) {
   var xhr = new XMLHttpRequest();
-  xhr.open("POST", API_URL[env], true);
+  xhr.open("POST", API_URL[data.env], true);
   xhr.setRequestHeader('Content-type', 'application/json');
   xhr.setRequestHeader('x-auth-client', apiKey);
 
   xhr.onload = function () {
-    var data = JSON.parse(xhr.responseText);
-    if (xhr.readyState == 4 && xhr.status == "201") {
-      window.location.href = data.verification.url;
-    } else {
-      throw new Error(data);
-    }
+    return cb(xhr);
   };
+
   var body = {
     verification: {
       id: uuid.v4(),
       features: data.features,
-      person: data.person,
+      person: {
+        firsName: data.person.givenName,
+        lastName: data.person.lastName
+      },
       timestamp: new Date().toISOString()
     }
   };
