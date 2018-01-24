@@ -1,0 +1,39 @@
+.veriff-container {
+  margin-top: 80px;
+  width: 125px;
+}
+
+.veriff-label {
+  display: inline-block;
+  max-width: 100%;
+  font-size: 12px;
+  color: rgba(0, 0, 0, 0.5);
+  font-weight: normal;
+  margin-bottom: 10px;
+}
+
+.veriff-text {
+    border: 0;
+    outline: 0;
+    background: transparent;
+    border-bottom: 2px solid rgba(0, 0, 0, 0.25);
+    width: 100%;
+    font-size: 14px;
+    border-radius: 0;
+    -webkit-appearance: none;
+    color: black;
+    margin-bottom: 5px;
+}
+
+.veriff-submit {
+  display: inline-block;
+  align-items: center;
+  justify-content: center;
+  min-height: 16px;
+  margin-top: 10px;
+  padding: 5px 16px;
+  border-radius: 100px;
+  background-color: #4DD965;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  color: rgba(255, 255, 255, 0.8);
+}

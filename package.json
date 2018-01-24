@@ -1,0 +1,36 @@
+{
+  "name": "veirff-js-sdk",
+  "version": "0.1.0",
+  "description": "JavaScript SDK for Veriff identity verification",
+  "main": "lib/index.js",
+  "scripts": {
+    "build": "webpack --env dev && webpack --env build",
+    "dev": "webpack --progress --colors --watch --env dev",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Ilia Aphtsiauri <ilia@veriff.me> (https://github.com/iaptsiauri)",
+  "keywords": [
+    "veriff",
+    "sdk",
+    "online",
+    "identity",
+    "verification"
+  ],
+  "license": "ISC",
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.0",
+    "babel-eslint": "^8.2.1",
+    "babel-loader": "^7.1.2",
+    "babel-plugin-add-module-exports": "^0.2.1",
+    "babel-preset-env": "^1.6.1",
+    "bable-loader": "0.0.1-security",
+    "eslint": "^4.16.0",
+    "eslint-loader": "^1.9.0",
+    "webpack": "^3.10.0",
+    "yargs": "^11.0.0"
+  },
+  "dependencies": {
+    "uuid": "^3.2.1"
+  }
+}
