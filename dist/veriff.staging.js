@@ -160,7 +160,7 @@ var Veriff = function Veriff(apiKey) {
     apiKey: apiKey,
     person: {},
     features: features,
-    env: {"ENV":"dev","VERIFF_API_URL":"http://localhost:3000"}.ENV,
+    env: {"ENV":"staging","VERIFF_API_URL":"https://staging.veriff.me"}.ENV,
     setOptions: function setOptions(_ref) {
       var person = _ref.person,
           features = _ref.features;
@@ -324,7 +324,7 @@ util.camelCaseHuminize = function camelCaseHuminize(str) {
 
 var uuid = __webpack_require__(6);
 
-var API_URL = {"ENV":"dev","VERIFF_API_URL":"http://localhost:3000"}.VERIFF_API_URL;
+var API_URL = {"ENV":"staging","VERIFF_API_URL":"https://staging.veriff.me"}.VERIFF_API_URL;
 
 var createSession = function createSession(apiKey, data, cb) {
   var xhr = new XMLHttpRequest();
@@ -528,4 +528,4 @@ module.exports = v4;
 /***/ })
 /******/ ]);
 });
-//# sourceMappingURL=veriff.js.map
+//# sourceMappingURL=veriff.staging.js.map

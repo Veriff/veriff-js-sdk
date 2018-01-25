@@ -160,7 +160,7 @@ var Veriff = function Veriff(apiKey) {
     apiKey: apiKey,
     person: {},
     features: features,
-    env: {"ENV":"dev","VERIFF_API_URL":"http://localhost:3000"}.ENV,
+    env: {"ENV":"dev","VERIFF_API_URL":"http://localhost:3000/v1"}.ENV,
     setOptions: function setOptions(_ref) {
       var person = _ref.person,
           features = _ref.features;
@@ -192,11 +192,12 @@ var Veriff = function Veriff(apiKey) {
           person: _this.person,
           features: _this.features
         };
-        createSession(_this.apiKey, data, function (err, data) {
+
+        createSession(_this.apiKey, data, function (err, response) {
           if (err) {
             throw new Error(err);
           }
-          window.location.href = data.verification.url;
+          window.location.href = response.verification.url;
         });
       };
     }
@@ -324,7 +325,7 @@ util.camelCaseHuminize = function camelCaseHuminize(str) {
 
 var uuid = __webpack_require__(6);
 
-var API_URL = {"ENV":"dev","VERIFF_API_URL":"http://localhost:3000"}.VERIFF_API_URL;
+var API_URL = {"ENV":"dev","VERIFF_API_URL":"http://localhost:3000/v1"}.VERIFF_API_URL + '/sessions';
 
 var createSession = function createSession(apiKey, data, cb) {
   var xhr = new XMLHttpRequest();
@@ -528,4 +529,4 @@ module.exports = v4;
 /***/ })
 /******/ ]);
 });
-//# sourceMappingURL=veriff.js.map
+//# sourceMappingURL=veriff.dev.js.map
