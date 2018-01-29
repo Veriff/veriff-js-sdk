@@ -3,7 +3,7 @@ Veriff JS SDK for browser integration
 
 ### Setup
 
-Include Veriff SDK as a script tag:
+Include Veriff SDK (SDK builds for different env can be found in dist folder) as a script tag:
 
 ```html
 <script src='dist/veriff.min.js'></script>
@@ -25,6 +25,6 @@ Veriff SDK requires one parent element in HTML:
 To initialize the library you would need an API Key and the list of features
 ```Javascript
   const veriff = Veriff(apiKey);
-  veriff.setOptions({ env:'dev', features: ['selfid', 'video_call'] })
+  veriff.setOptions({ features: ['selfid', 'video_call'] })
   veriff.mount('veriff-root')
 ```
