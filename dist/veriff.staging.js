@@ -166,15 +166,21 @@ var Veriff = function Veriff(apiKey) {
     features: features,
     id: id,
     env: {"ENV":"staging","VERIFF_API_URL":"https://staging.veriff.me/v1"}.ENV,
+    targetBlank: false,
     setOptions: function setOptions(_ref2) {
       var person = _ref2.person,
-          features = _ref2.features;
+          features = _ref2.features,
+          targetBlank = _ref2.targetBlank;
 
       if (person) {
         this.person = Object.assign({}, this.person, person.givenName ? { givenName: person.givenName } : null, person.lastName ? { lastName: person.lastName } : null);
       }
       if (features && features instanceof Array) {
         this.features = features;
+      }
+
+      if (targetBlank) {
+        this.targetBlank = targetBlank;
       }
     },
     mount: function mount(parentId) {
@@ -202,6 +208,9 @@ var Veriff = function Veriff(apiKey) {
         createSession(_this.apiKey, data, function (err, response) {
           if (err) {
             throw new Error(err);
+          }
+          if (_this.targetBlank) {
+            return window.open(response.verification.url);
           }
           window.location.href = response.verification.url;
         });
