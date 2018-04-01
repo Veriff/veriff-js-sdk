@@ -526,7 +526,7 @@ var createSession = function createSession(apiKey, data, cb) {
       id: data.id,
       features: data.features,
       person: {
-        firsName: data.person.givenName,
+        firstName: data.person.givenName,
         lastName: data.person.lastName
       },
       timestamp: new Date().toISOString()
