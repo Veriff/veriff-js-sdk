@@ -3,7 +3,7 @@ Veriff JS SDK, is a simple and customisable library which helps to integrate wit
 
 ### Install
 There two ways to add Veriff SDK to the project.
-Include Veriff SDK (in order to test Veriff, staging environment can be used, `veirff.staging.js`) as a script tag:
+Include Veriff SDK (in order to test Veriff, staging environment can be used, `veriff.staging.js`) as a script tag:
 
 ```html
 <script src='https://cdn.veriff.me/sdk/js/veriff.min.js'></script>
@@ -22,8 +22,10 @@ $ npm install --save @veriff/js-sdk
 ```
 
 ```javascript
+ // CommonJS
  var Veriff = require('@veriff/js-sdk');
 
+ // ES6 style import
  import Veriff from '@veriff/js-sdk';
 ```
 
@@ -34,9 +36,25 @@ Veriff JS SDK requires one parent element in HTML:
 ```html
 <div id='veriff-root'></div>
 ```
-In order to initialize the library, API Key, parentId and onSession callback function is required. 
-onSession function is executed after the response is received from the API, response argument contains a 
+In order to initialize the library, **API Key**, **parentId** and **onSession** callback function is required. 
+
+```Javascript
+  var veriff = Veriff({
+    apiKey: 'API_KEY',
+    parentId: 'veriff-root',
+    onSession: function(err, response) {
+      // received the response, verification can be started now
+    }
+  });
+  veriff.mount();
+```
+By default the following form will be rendered: 
+
+![alt text](https://cdn.veriff.me/assets/veriff-js-sdk.png "Veriff JS SDK")
+
+**onSession** function is executed after the **response** is received from the API, response body contains a 
 verification object with following schema:
+
 ```json
 {
     "status": "success",
@@ -49,19 +67,6 @@ verification object with following schema:
     }
 }
 ```
-```Javascript
-  var veriff = Veriff({
-    apiKey,
-    parentId,
-    onSession: function(err, response) {
-      // received the response, verification can be started now
-    }
-  });
-  veriff.mount();
-```
-By default the following form will be rendered: 
-
-![alt text](https://cdn.veriff.me/assets/veriff-js-sdk.png "Veriff JS SDK")
 
 In case the Given name / Last name or both are known, they can be passed to the SDK, therefore text input fields will not be rendered.
 
