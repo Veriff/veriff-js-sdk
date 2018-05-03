@@ -32,7 +32,7 @@ const createInputIfNeeded = function createInputIfNeeded({container, name, label
 }
 
 const createTemplate = function createTemplate(parentId, {
-  label = {
+  formLabel = {
     givenName: 'Given name',
     lastName: 'Last name'
   },
@@ -40,7 +40,7 @@ const createTemplate = function createTemplate(parentId, {
     givenName: false,
     lastName: false
   },
-  value = 'Start verification'
+  submitBtnText = 'Start verification'
 } = {}) {
   const parent = document.getElementById(parentId);
   if (!parent) {
@@ -52,10 +52,10 @@ const createTemplate = function createTemplate(parentId, {
   container.setAttribute('class', 'veriff-container');
   container.setAttribute('name', 'veriff-form');
 
-  createInputIfNeeded({ container, name: 'givenName', label: label.givenName, shouldRender: person.givenName });
-  createInputIfNeeded({ container, name: 'lastName',  label: label.lastName, shouldRender: person.lastName });
+  createInputIfNeeded({ container, name: 'givenName', label: formLabel.givenName, shouldRender: person.givenName });
+  createInputIfNeeded({ container, name: 'lastName',  label: formLabel.lastName, shouldRender: person.lastName });
 
-  const submit = createInput({ type:'submit', name: 'submitBtn', value });
+  const submit = createInput({ type:'submit', name: 'submitBtn', value: submitBtnText });
   container.appendChild(submit);
 
   fragment.appendChild(container);

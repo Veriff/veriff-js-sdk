@@ -5,21 +5,22 @@ const createSession = function(apiKey, data, cb) {
   xhr.open("POST", API_URL, true);
   xhr.setRequestHeader('Content-type','application/json');
   xhr.setRequestHeader('x-auth-client', apiKey);
-
   xhr.onreadystatechange = () => {
     if (xhr.readyState === 4) {
       if (xhr.status == '201') {
         const resp = JSON.parse(xhr.responseText);
         cb(null, resp);
       } else {
-        cb(xhr.status, null);
+        cb({
+          status: xhr.status,
+          statusText: xhr.statusText
+        }, null);
       }
     }
   }
 
   const body = {
     verification: {
-      id: data.id,
       features: data.features,
       person: {
         firstName: data.person.givenName,

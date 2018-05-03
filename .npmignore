@@ -1,0 +1,9 @@
+dist
+src
+test
+node_modules
+scripts
+
+.eslintrc
+.babelrc
+webpack.config.js

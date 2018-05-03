@@ -1,8 +1,8 @@
 {
-  "name": "veirff-js-sdk",
-  "version": "0.1.0",
+  "name": "@veriff/js-sdk",
+  "version": "0.2.1",
   "description": "JavaScript SDK for Veriff identity verification",
-  "main": "lib/index.js",
+  "main": "lib/veriff.js",
   "scripts": {
     "build": "webpack --env dev && webpack --env staging  && webpack --env sandbox && webpack --env production",
     "dev": "webpack --progress --colors --watch --env dev",
@@ -26,8 +26,10 @@
     "babel-preset-env": "^1.6.1",
     "bable-loader": "0.0.1-security",
     "chai": "^4.1.2",
+    "css-loader": "^0.28.11",
     "eslint": "^4.16.0",
     "eslint-loader": "^1.9.0",
+    "extract-text-webpack-plugin": "^3.0.2",
     "jasmine-core": "^2.9.1",
     "karma": "^2.0.0",
     "karma-chrome-launcher": "^2.2.0",
@@ -35,10 +37,8 @@
     "karma-webpack": "^2.0.9",
     "mocha": "^5.0.0",
     "sinon": "^4.2.1",
+    "style-loader": "^0.21.0",
     "webpack": "^3.10.0",
     "yargs": "^11.0.0"
-  },
-  "dependencies": {
-    "uuid": "^3.2.1"
   }
 }

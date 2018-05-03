@@ -3,17 +3,20 @@
   <head>
     <meta charset="utf-8">
     <title></title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="styles.css">
   </head>
   <body>
     <div id="veriff-mount">
 
     </div>
-    <script src="veriff.dev.js"></script>
+    <script src="veriff.staging.js"></script>
     <script type="text/javascript">
-      const veriff = Veriff('8e4f7cd8-7a19-4d7d-971f-a076407ee03c',{ features: ['selfid', 'video_call']});
-      veriff.mount('veriff-mount')
-      console.log(veriff.id);
+      const veriff = Veriff({
+        apiKey: '8e4f7cd8-7a19-4d7d-971f-a076407ee03c', 
+        parentId: 'veriff-mount', 
+        onSession: (err, response) => {console.log(err); console.log(JSON.stringify(response))}
+      });
+      veriff.mount();
     </script>
   </body>
 </html>

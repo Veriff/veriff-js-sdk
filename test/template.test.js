@@ -1,5 +1,5 @@
 const { expect } = require('chai');
-const { createTemplate } = require('../lib/template');
+const { createTemplate } = require('../src/template');
 
 
 describe('Veriff create template', function() {

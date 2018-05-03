@@ -1,4 +1,4 @@
-const util = require('../lib/util');
+const util = require('../src/util');
 const { expect } = require('chai');
 
 describe('Util', function() {

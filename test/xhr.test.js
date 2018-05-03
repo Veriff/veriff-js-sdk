@@ -1,6 +1,6 @@
 const { should } = require('chai');
 const sinon = require('sinon');
-const createSession = require('../lib/xhr');
+const createSession = require('../src/xhr');
 
 should();
 
@@ -52,7 +52,8 @@ describe('Veriff create seassion', function() {
 
     createSession('123', requestData, function(err) {
       err.should.exist;
-      err.should.eql(500);
+			err.status.should.eql(500);
+			err.statusText.should.eql('Internal Server Error');
       done();
     });
 

@@ -1,6 +1,7 @@
 const webpack = require('webpack');
-const UglifyJsPlugin = webpack.optimize.UglifyJsPlugin;
 const path = require('path');
+const UglifyJsPlugin = webpack.optimize.UglifyJsPlugin;
+const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const env = require('yargs').argv.env || 'dev';
 
 const DEV_CONFIG = {
@@ -30,53 +31,78 @@ const ENV_CONFIG = ENV_MAP[env]
 
 const libraryName = 'Veriff';
 
-let plugins = [
-  new webpack.DefinePlugin({
-    'process.env': JSON.stringify({
-      ENV: env,
-      VERIFF_API_URL: ENV_CONFIG.VERIFF_API_URL
+const plugins = (umd = false) => {
+  const base = [
+    new webpack.DefinePlugin({
+        'process.env': JSON.stringify({
+        ENV: env,
+        VERIFF_API_URL: ENV_CONFIG.VERIFF_API_URL
+      })
     })
-  })
-];
+  ]
+  if(env === 'production') base.push(new UglifyJsPlugin({ minimize: true }));
+  return umd ? base.concat(new ExtractTextPlugin("styles.css")) : base; 
+};
 
-let outputFile;
+const rules = (umd = false) => {
+  const base = [
+    {
+      test: /(\.js)$/,
+      loader: 'babel-loader',
+      exclude: /node_modules/
+    },
+    {
+      test: /(\.js)$/,
+      loader: 'eslint-loader',
+      exclude: /node_modules/
+    }
+  ];
 
-if (env === 'production') {
-  plugins.push(new UglifyJsPlugin({ minimize: true }));
-  outputFile = `${libraryName.toLowerCase()}.min.js`;
-} else {
-  outputFile = `${libraryName.toLowerCase()}.${env}.js`;
+  if(umd) {
+    return base.concat({
+      test: /\.css$/,
+      use: ExtractTextPlugin.extract({
+        fallback: "style-loader",
+        use: "css-loader"
+      })
+    });
+  }
+  return base.concat({
+    test: /\.css$/,
+    loader: 'style-loader!css-loader',
+    exclude: /node_modules/
+  });
 }
 
-const config = {
-  entry: __dirname + '/lib/index.js',
+const config = (umd = false) => ({
+  entry: `${__dirname}/src/index.js`,
   devtool: 'source-map',
+  module: {
+    rules: rules(umd)
+  },
+  resolve: {
+    modules: [path.resolve('./node_modules'), path.resolve('./src')],
+    extensions: ['.css','.json', '.js']
+  },
+  plugins: plugins(umd)
+});
+
+const umdConfig = Object.assign({}, config(true), {
   output: {
-    path: __dirname + '/dist',
-    filename: outputFile,
+    path: `${__dirname}/dist`,
+    filename: env === 'production'? `${libraryName.toLowerCase()}.min.js`: `${libraryName.toLowerCase()}.${env}.js`,
     library: libraryName,
     libraryTarget: 'umd',
     umdNamedDefine: true
-  },
-  module: {
-    rules: [
-      {
-        test: /(\.js)$/,
-        loader: 'babel-loader',
-        exclude: /(node_modules)/
-      },
-      {
-        test: /(\.jsx|\.js)$/,
-        loader: 'eslint-loader',
-        exclude: /node_modules/
-      }
-    ]
-  },
-  resolve: {
-    modules: [path.resolve('./node_modules'), path.resolve('./lib')],
-    extensions: ['.json', '.js']
-  },
-  plugins: plugins
-};
+  }
+});
 
-module.exports = config;
+const npmConfig = Object.assign({}, config(), {
+  output: {
+    path: `${__dirname}/lib`,
+    filename: 'veriff.js',
+    libraryTarget: 'commonjs2'
+  }
+});
+
+module.exports = [ umdConfig,  npmConfig ];
