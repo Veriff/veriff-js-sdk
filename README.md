@@ -3,16 +3,16 @@ Veriff JS SDK, is a simple and customisable library which helps to integrate wit
 
 ### Install
 There two ways to add Veriff SDK to the project.
-Include Veriff SDK (SDK builds for different env can be found in dist folder) as a script tag:
+Include Veriff SDK (in order to test Veriff, staging environment can be used, `veirff.staging.js`) as a script tag:
 
 ```html
-<script src='dist/veriff.min.js'></script>
+<script src='https://cdn.veriff.me/sdk/js/veriff.min.js'></script>
 ```
 
 add the CSS styles:
 
 ```html
-<link rel='stylesheet' href='dist/styles.css'>
+<link rel='stylesheet' href='https://cdn.veriff.me/sdk/js/styles.css'>
 ```
 
 or install it via a package manager, *styles* are added inline 
@@ -61,7 +61,7 @@ verification object with following schema:
 ```
 By default the following form will be rendered: 
 
-![alt text](https://s3-eu-west-1.amazonaws.com/cdn.veriff.me/assets/veriff-js-sdk.png "Veriff JS SDK")
+![alt text](https://cdn.veriff.me/assets/veriff-js-sdk.png "Veriff JS SDK")
 
 In case the Given name / Last name or both are known, they can be passed to the SDK, therefore text input fields will not be rendered.
 
