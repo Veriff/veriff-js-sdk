@@ -50,7 +50,6 @@ verification object with following schema:
 }
 ```
 ```Javascript
-<<<<<<< HEAD
   var veriff = Veriff({
     apiKey,
     parentId,
@@ -59,11 +58,6 @@ verification object with following schema:
     }
   });
   veriff.mount();
-=======
-  const veriff = Veriff(apiKey);
-  veriff.setOptions({ features: ['selfid'] })
-  veriff.mount('veriff-root')
->>>>>>> 3bdd26d63e017b062cec9d7e86f7944782a7cf0f
 ```
 By default the following form will be rendered: 
 
