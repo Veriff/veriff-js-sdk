@@ -2,13 +2,13 @@ require('./styles/style.css');
 const { createTemplate } = require('./template');
 const createSession = require('./xhr');
 
-const Veriff = function Veriff({ apiKey, parentId, onSession }) {
+const Veriff = function Veriff({ env, apiKey, parentId, onSession }) {
   return {
+    env: process.env.ENV,
     params: {
       person: {},
       features: ['selfid'],
     },
-    env: process.env.ENV,
     setParams(newParams) {
       this.params = Object.assign({}, this.params, newParams );
     },
@@ -23,7 +23,7 @@ const Veriff = function Veriff({ apiKey, parentId, onSession }) {
         const lastName = form.lastName ? form.lastName.value : null;
         this.setParams({ person: { givenName, lastName }});
 
-        createSession(apiKey, this.params, (err, response) => { onSession(err, response) });
+        createSession(env, apiKey, this.params, (err, response) => { onSession(err, response) });
       }
     }
   }

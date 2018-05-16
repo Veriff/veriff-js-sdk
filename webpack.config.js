@@ -1,7 +1,7 @@
 const webpack = require('webpack');
 const path = require('path');
 const UglifyJsPlugin = webpack.optimize.UglifyJsPlugin;
-const ExtractTextPlugin = require("extract-text-webpack-plugin");
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const env = require('yargs').argv.env || 'dev';
 
 const DEV_CONFIG = {
@@ -27,21 +27,18 @@ const ENV_MAP = {
   production: PRODUCTION_CONFIG,
 }
 
-const ENV_CONFIG = ENV_MAP[env]
-
 const libraryName = 'Veriff';
 
 const plugins = (umd = false) => {
   const base = [
     new webpack.DefinePlugin({
         'process.env': JSON.stringify({
-        ENV: env,
-        VERIFF_API_URL: ENV_CONFIG.VERIFF_API_URL
+        ENV_MAP: ENV_MAP
       })
     })
   ]
   if(env === 'production') base.push(new UglifyJsPlugin({ minimize: true }));
-  return umd ? base.concat(new ExtractTextPlugin("styles.css")) : base; 
+  return umd ? base.concat(new ExtractTextPlugin("styles.css")) : base;
 };
 
 const rules = (umd = false) => {
@@ -90,7 +87,7 @@ const config = (umd = false) => ({
 const umdConfig = Object.assign({}, config(true), {
   output: {
     path: `${__dirname}/dist`,
-    filename: env === 'production'? `${libraryName.toLowerCase()}.min.js`: `${libraryName.toLowerCase()}.${env}.js`,
+    filename: 'veriff.min.js',
     library: libraryName,
     libraryTarget: 'umd',
     umdNamedDefine: true

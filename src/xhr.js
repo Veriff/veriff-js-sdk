@@ -1,8 +1,10 @@
-const API_URL = `${process.env.VERIFF_API_URL}/sessions`;
+const ENV_MAP = process.env.ENV_MAP;
 
-const createSession = function(apiKey, data, cb) {
+const createSession = function(env = 'production', apiKey, data, cb) {
+  const api = ENV_MAP[env]['VERIFF_API_URL'];
+  const apiUrl = `${api}/sessions`;
   const xhr = new XMLHttpRequest();
-  xhr.open("POST", API_URL, true);
+  xhr.open('POST', apiUrl, true);
   xhr.setRequestHeader('Content-type','application/json');
   xhr.setRequestHeader('x-auth-client', apiKey);
   xhr.onreadystatechange = () => {

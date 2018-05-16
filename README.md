@@ -2,8 +2,7 @@
 Veriff JS SDK, is a simple and customisable library which helps to integrate with Veriff Online Identity solution.
 
 ### Install
-There two ways to add Veriff SDK to the project.
-Include Veriff SDK (in order to test Veriff, staging environment can be used, `veriff.staging.js`) as a script tag:
+Include as a script tag:
 
 ```html
 <script src='https://cdn.veriff.me/sdk/js/veriff.min.js'></script>
@@ -15,7 +14,7 @@ add the CSS styles:
 <link rel='stylesheet' href='https://cdn.veriff.me/sdk/js/styles.css'>
 ```
 
-or install it via a package manager, *styles* are added inline 
+or install it via a package manager, *styles* are added inline
 
 ```bash
 $ npm install --save @veriff/js-sdk
@@ -36,10 +35,11 @@ Veriff JS SDK requires one parent element in HTML:
 ```html
 <div id='veriff-root'></div>
 ```
-In order to initialize the library, **API Key**, **parentId** and **onSession** callback function is required. 
+In order to initialize the library, **API Key**, **parentId** and **onSession** callback function is required.
 
 ```Javascript
   var veriff = Veriff({
+    env: 'production', // or 'staging'
     apiKey: 'API_KEY',
     parentId: 'veriff-root',
     onSession: function(err, response) {
@@ -48,11 +48,11 @@ In order to initialize the library, **API Key**, **parentId** and **onSession** 
   });
   veriff.mount();
 ```
-By default the following form will be rendered: 
+By default the following form will be rendered:
 
 ![alt text](https://cdn.veriff.me/assets/veriff-js-sdk.png "Veriff JS SDK")
 
-**onSession** function is executed after the **response** is received from the API, response body contains a 
+**onSession** function is executed after the **response** is received from the API, response body contains a
 verification object with following schema:
 
 ```json
