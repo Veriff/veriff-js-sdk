@@ -19,8 +19,12 @@ const Veriff = function Veriff({ env, apiKey, parentId, onSession }) {
         if (!this.params.features || !(this.params.features instanceof Array)) {
           throw new Error('Session features array is required');
         }
-        const givenName = form.givenName ? form.givenName.value : null;
-        const lastName = form.lastName ? form.lastName.value : null;
+        
+        const givenName = form.givenName ? form.givenName.value :
+          this.params.person.givenName ? this.params.person.givenName : null;
+        const lastName = form.lastName ? form.lastName.value :
+          this.params.person.lastName ? this.params.person.lastName : null;
+        
         this.setParams({ person: { givenName, lastName }});
 
         createSession(env, apiKey, this.params, (err, response) => { onSession(err, response) });
