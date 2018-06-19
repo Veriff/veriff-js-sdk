@@ -74,7 +74,8 @@ In case the Given name / Last name or both are known, they can be passed to the 
   veriff.setParams({
     person: {
       givenName: 'Foo',
-      lastName: 'Bar'
+      lastName: 'Bar',
+      idNumber: 12345
     }
   });
 ```
@@ -85,7 +86,8 @@ additionally the input labels and button text value can be customised.
   veriff.mount({
     formLabel: {
       givenName: 'First name',
-      lastName: 'Family name'
+      lastName: 'Family name',
+      idNumber: 'Id'
     },
     submitBtnText: 'Veriff Me'
   });
