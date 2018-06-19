@@ -24,8 +24,10 @@ const Veriff = function Veriff({ env, apiKey, parentId, onSession }) {
           this.params.person.givenName ? this.params.person.givenName : null;
         const lastName = form.lastName ? form.lastName.value :
           this.params.person.lastName ? this.params.person.lastName : null;
+        const idNumber = form.idNumber ? form.idNumber.value :
+          this.params.person.idNumber ? this.params.person.idNumber : null;
         
-        this.setParams({ person: { givenName, lastName }});
+        this.setParams({ person: { givenName, lastName, idNumber }});
 
         createSession(env, apiKey, this.params, (err, response) => { onSession(err, response) });
       }
