@@ -87,6 +87,7 @@ additionally the input labels and button text value can be customised.
       givenName: 'First name',
       lastName: 'Family name'
     },
-    submitBtnText: 'Veriff Me'
+    submitBtnText: 'Veriff Me',
+    loadingText: 'Please wait...'
   });
 ```
