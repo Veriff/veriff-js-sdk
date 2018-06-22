@@ -1,11 +1,11 @@
 {
   "name": "@veriff/js-sdk",
-  "version": "0.3.3",
+  "version": "0.3.4",
   "description": "JavaScript SDK for Veriff identity verification",
   "main": "lib/veriff.js",
   "scripts": {
-    "build": "webpack --env dev && webpack --env staging  && webpack --env sandbox && webpack --env production",
-    "dev": "webpack --progress --colors --watch --env dev",
+    "build": "webpack",
+    "dev": "webpack --progress --colors --watch",
     "test": "./node_modules/karma/bin/karma start ./scripts/karma.conf.js"
   },
   "author": "Ilia Aphtsiauri <ilia@veriff.me> (https://github.com/iaptsiauri)",

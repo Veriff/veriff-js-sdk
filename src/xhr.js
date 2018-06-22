@@ -26,7 +26,8 @@ const createSession = function(env = 'production', apiKey, data, cb) {
       features: data.features,
       person: {
         firstName: data.person.givenName,
-        lastName: data.person.lastName
+        lastName: data.person.lastName,
+        idNumber: data.person.idNumber
       },
       timestamp: new Date().toISOString()
     }
