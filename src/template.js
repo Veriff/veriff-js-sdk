@@ -43,7 +43,7 @@ const createTemplate = function createTemplate(parentId, {
     lastName: false,
     idNumber: false
   },
-  submitBtnText = 'Start verification'
+  submitBtnText
 } = {}) {
   const parent = document.getElementById(parentId);
   if (!parent) {

@@ -90,5 +90,6 @@ additionally the input labels and button text value can be customised.
       idNumber: 'Id'
     },
     submitBtnText: 'Veriff Me'
+    loadingText: 'Please wait...'
   });
 ```
