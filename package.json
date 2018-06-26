@@ -4,9 +4,9 @@
   "description": "JavaScript SDK for Veriff identity verification",
   "main": "lib/veriff.js",
   "scripts": {
-    "build": "webpack",
+    "build": "webpack --config webpack/prod.config.js",
     "dev": "webpack --progress --colors --watch --config webpack/prod.config.js",
-    "test": "./node_modules/karma/bin/karma start ./scripts/karma.conf.js --config webpack/prod.config.js"
+    "test": "./node_modules/karma/bin/karma start ./scripts/karma.conf.js"
   },
   "author": "Ilia Aphtsiauri <ilia@veriff.me> (https://github.com/iaptsiauri)",
   "keywords": [
