@@ -29,7 +29,7 @@ describe('Veriff create seassion', function() {
 			env: 'test'
 		};
 
-		createSession('key', requestData, (err, resp) => {
+		createSession('test', 'key', requestData, (err, resp) => {
 			const expectedData = JSON.parse(responseData);
 			resp.should.deep.equal(expectedData);
 			done();
@@ -50,7 +50,7 @@ describe('Veriff create seassion', function() {
       env: 'test'
     };
 
-    createSession('123', requestData, function(err) {
+    createSession('test', '123', requestData, function(err) {
       err.should.exist;
 			err.status.should.eql(500);
 			err.statusText.should.eql('Internal Server Error');
