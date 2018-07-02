@@ -1,6 +1,5 @@
 const path = require('path');
 const webpack = require('webpack');
-const env = require('yargs').argv.env || 'dev';
 const UglifyJsPlugin = webpack.optimize.UglifyJsPlugin;
 
 const LOCAL_CONFIG = {
@@ -27,29 +26,26 @@ const ENV_MAP = {
   production: PRODUCTION_CONFIG,
 }
 
-const plugins = () => {
-    const base = [
-      new webpack.DefinePlugin({
-          'process.env': JSON.stringify({
-          ENV_MAP: ENV_MAP
-        })
-      })
-    ]
-    if(env === 'production') base.push(new UglifyJsPlugin({ minimize: true }));
-    return base;
-};
+const plugins = () => ([
+  new webpack.DefinePlugin({
+    'process.env': JSON.stringify({
+      ENV_MAP: ENV_MAP
+    })
+  }),
+  new UglifyJsPlugin({ minimize: true })
+]);
 
 
 module.exports = {
-    module: {
-        loaders: [
-            { test: /(\.js)$/, loader: 'babel-loader', exclude: /node_modules/ },
-            { test: /(\.js)$/, loader: 'eslint-loader', exclude: /node_modules/ }
-        ]     
-    },
-    resolve: {
-        modules: [path.resolve('./node_modules'), path.resolve('./src')],
-        extensions: ['.css','.json', '.js']
-    },
-    plugins: plugins()
+  module: {
+    loaders: [
+      { test: /(\.js)$/, loader: 'babel-loader', exclude: /node_modules/ },
+      { test: /(\.js)$/, loader: 'eslint-loader', exclude: /node_modules/ }
+    ]
+  },
+  resolve: {
+    modules: [path.resolve('./node_modules'), path.resolve('./src')],
+    extensions: ['.css', '.json', '.js']
+  },
+  plugins: plugins()
 };
