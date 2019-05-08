@@ -1,3 +1,10 @@
+---
+owner: "Client Tools"
+description: "JS SDK for easy integration with Veriff"
+status: "production"
+type: "library"
+---
+
 # Veriff JS SDK
 Veriff JS SDK, is a simple and customisable library which helps to integrate with Veriff Online Identity solution.
 
