@@ -2,15 +2,14 @@ require('./styles/style.css');
 const { createTemplate } = require('./template');
 const createSession = require('./xhr');
 
-const Veriff = function Veriff({ env, apiKey, parentId, onSession }) {
+const Veriff = function Veriff({ host, apiKey, parentId, onSession }) {
   return {
-    env: process.env.ENV,
     params: {
       person: {},
       features: ['selfid'],
     },
     setParams(newParams) {
-      this.params = Object.assign({}, this.params, newParams );
+      this.params = Object.assign({}, this.params, newParams);
     },
     mount({ formLabel, submitBtnText = 'Start Verification', loadingText = 'Loading...' } = {}) {
       const form = createTemplate(parentId, { person: this.params.person, formLabel, submitBtnText });
@@ -32,7 +31,7 @@ const Veriff = function Veriff({ env, apiKey, parentId, onSession }) {
         this.setParams({ person: { givenName, lastName, idNumber }});
         form.submitBtn.value = loadingText;
         form.submitBtn.disabled = true;
-        createSession(env, apiKey, this.params, (err, response) => {
+        createSession(host, apiKey, this.params, (err, response) => {
           onSession(err, response);
           form.submitBtn.value = submitBtnText;
           form.submitBtn.disabled = false;

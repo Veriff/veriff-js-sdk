@@ -1,6 +1,6 @@
 {
   "name": "@veriff/js-sdk",
-  "version": "0.3.4",
+  "version": "0.4.0",
   "description": "JavaScript SDK for Veriff identity verification",
   "main": "lib/veriff.js",
   "scripts": {
