@@ -1,17 +1,20 @@
-require('./styles/style.css');
-const { createTemplate } = require('./template');
-const createSession = require('./xhr');
+// import './styles/style.css';
+import { createTemplate } from './template';
+import { createSession } from './xhr';
 
-const Veriff = function Veriff({ host, apiKey, parentId, onSession }) {
+type Options = { formLabel: any, submitBtnText: string, loadingText: string };
+
+export function Veriff({ host, apiKey, parentId, onSession }) {
   return {
     params: {
       person: {},
       features: ['selfid'],
     },
     setParams(newParams) {
-      this.params = Object.assign({}, this.params, newParams);
+      this.params = (<any>Object).assign({}, this.params, newParams);
     },
-    mount({ formLabel, submitBtnText = 'Start Verification', loadingText = 'Loading...' } = {}) {
+    mount(options: Options) {
+      const { formLabel, submitBtnText = 'Start Verification', loadingText = 'Loading...' } = options;
       const form = createTemplate(parentId, { person: this.params.person, formLabel, submitBtnText });
       form.onsubmit = (e) => {
         e.preventDefault();
@@ -23,11 +26,11 @@ const Veriff = function Veriff({ host, apiKey, parentId, onSession }) {
         if (!this.params.features || !(this.params.features instanceof Array)) {
           throw new Error('Session features array is required');
         }
-        
+
         if (!givenName || !lastName) {
           throw new Error('Required parameters givenName or lastName is missing');
         }
-        
+
         this.setParams({ person: { givenName, lastName, idNumber }});
         form.submitBtn.value = loadingText;
         form.submitBtn.disabled = true;
@@ -40,6 +43,3 @@ const Veriff = function Veriff({ host, apiKey, parentId, onSession }) {
     }
   }
 }
-
-
-module.exports = Veriff;

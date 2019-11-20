@@ -1,6 +1,20 @@
-const { camelCaseToSlug }  = require('./util');
+import { camelCaseToSlug }  from './util';
 
-const createInput = function createInput(opts) {
+type FormLabel = { givenName: string, lastName: string, idNumber: string };
+type Person = { givenName: boolean, lastName: boolean, idNumber: boolean };
+
+const defaultFormLabel: FormLabel = {
+  givenName: 'Given name',
+  lastName: 'Last name',
+  idNumber: 'Id number'
+};
+const defaultPerson: Person = {
+      givenName: false,
+      lastName: false,
+      idNumber: false
+    };
+
+export function createInput(opts) {
   const { type, value, name, required } = opts;
   const input = document.createElement('input');
   input.setAttribute('type', type);
@@ -14,7 +28,8 @@ const createInput = function createInput(opts) {
   input.required = required;
   return input;
 }
-const createLabel = function createLabel(value, labelFor) {
+
+export function createLabel(value, labelFor) {
   const label = document.createElement('label');
   label.setAttribute('class', `veriff-label`);
   label.setAttribute('id', `veriff-label-${camelCaseToSlug(labelFor)}`);
@@ -22,7 +37,8 @@ const createLabel = function createLabel(value, labelFor) {
   label.innerHTML = value;
   return label;
 }
-const createInputIfNeeded = function createInputIfNeeded(opts) {
+
+export function createInputIfNeeded(opts) {
   const { container, name, label, shouldRender, required } = opts;
   if (!shouldRender) {
     const inputLabel = createLabel(label, name)
@@ -32,19 +48,10 @@ const createInputIfNeeded = function createInputIfNeeded(opts) {
   }
 }
 
-const createTemplate = function createTemplate(parentId, {
-  formLabel = {
-    givenName: 'Given name',
-    lastName: 'Last name',
-    idNumber: 'Id number'
-  },
-  person = {
-    givenName: false,
-    lastName: false,
-    idNumber: false
-  },
-  submitBtnText
-} = {}) {
+type Options = { formLabel: FormLabel, person: Person, submitBtnText: any };
+
+export function createTemplate(parentId: string, options: Options) {
+  const { formLabel = defaultFormLabel, person = defaultPerson, submitBtnText } = options;
   const parent = document.getElementById(parentId);
   if (!parent) {
     new Error(`Element ${parentId} does not exists`);
@@ -65,8 +72,4 @@ const createTemplate = function createTemplate(parentId, {
   fragment.appendChild(container);
   parent.appendChild(fragment);
   return container;
-}
-
-module.exports = {
-  createTemplate
 }
