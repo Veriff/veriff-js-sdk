@@ -1,4 +1,4 @@
-// import './styles/style.css';
+import './styles/style.css';
 import { createTemplate } from './template';
 import { createSession } from './xhr';
 
