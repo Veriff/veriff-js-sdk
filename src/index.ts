@@ -2,9 +2,16 @@
 import { createTemplate } from './template';
 import { createSession } from './xhr';
 
-type Options = { formLabel: any, submitBtnText: string, loadingText: string };
+type Options = {
+  host?: string,
+  apiKey: string,
+  parentId: string,
+  onSession: (err, response) => void
+};
+type MountOptions = { formLabel?: any, submitBtnText?: string, loadingText?: string };
 
-export function Veriff({ host, apiKey, parentId, onSession }) {
+export default function Veriff(options: Options) {
+  const { host = 'https://api.veriff.me', apiKey, parentId, onSession } = options;
   return {
     params: {
       person: {},
@@ -13,8 +20,8 @@ export function Veriff({ host, apiKey, parentId, onSession }) {
     setParams(newParams) {
       this.params = (<any>Object).assign({}, this.params, newParams);
     },
-    mount(options: Options) {
-      const { formLabel, submitBtnText = 'Start Verification', loadingText = 'Loading...' } = options;
+    mount(mountOptions: MountOptions = {}) {
+      const { formLabel, submitBtnText = 'Start Verification', loadingText = 'Loading...' } = mountOptions;
       const form = createTemplate(parentId, { person: this.params.person, formLabel, submitBtnText });
       form.onsubmit = (e) => {
         e.preventDefault();

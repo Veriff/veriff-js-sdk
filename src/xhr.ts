@@ -1,4 +1,4 @@
-export function createSession(host = 'https://api.veriff.me', apiKey, data, cb) {
+export function createSession(host, apiKey, data, cb) {
   const url = `${host}/v1/sessions`;
   const xhr: XMLHttpRequest = new XMLHttpRequest();
   xhr.open('POST', url, true);
