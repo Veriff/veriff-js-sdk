@@ -7,7 +7,7 @@
     "build": "webpack --config webpack/prod.config.js",
     "dev": "webpack --progress --colors --watch --config webpack/prod.config.js",
     "test": "./node_modules/karma/bin/karma start ./scripts/karma.conf.js",
-    "ts-build": "webpack --config webpack/webpack.config.js"
+    "ts-build": "webpack --config webpack/webpack.config.js --mode production"
   },
   "author": "Ilia Aphtsiauri <ilia@veriff.me> (https://github.com/iaptsiauri) && Maksim Tsvetkov <maksim.tsvetkov@veriff.com> (https://github.com/MaxFlower)",
   "keywords": [

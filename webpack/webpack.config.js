@@ -1,7 +1,8 @@
 module.exports = {
     entry: "./src/index.ts",
     output: {
-        filename: "./dist/bundle.js",
+        filename: "./lib/veriff.js",
+        libraryTarget: "umd"
     },
 
     resolve: {
