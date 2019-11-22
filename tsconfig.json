@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "outDir": "./dist",
+    "outDir": "./lib",
     "allowJs": true,
     "module": "commonjs",
     "target": "es5",
@@ -8,6 +8,7 @@
     "declaration": true
   },
   "include": [
-    "./src/**/*"
+    "./src/**/*",
+    "./test/**/*"
   ]
 }

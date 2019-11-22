@@ -6,9 +6,9 @@ interface IFormLabel {
   idNumber: string;
 }
 interface IPerson {
-  givenName: boolean;
-  lastName: boolean;
-  idNumber: boolean;
+  givenName: string | boolean;
+  lastName: string | boolean;
+  idNumber: string | boolean;
 }
 
 const defaultFormLabel: IFormLabel = {
@@ -58,9 +58,9 @@ export function createInputIfNeeded(opts) {
 }
 
 interface IOptions {
-  formLabel: IFormLabel;
-  person: IPerson;
-  submitBtnText: any;
+  formLabel?: IFormLabel;
+  person?: IPerson;
+  submitBtnText?: string;
 }
 
 export function createTemplate(parentId: string, options: IOptions) {
