@@ -1,18 +1,18 @@
-import { camelCaseToSlug }  from './util';
+import { camelCaseToSlug } from './util';
 
-type FormLabel = { givenName: string, lastName: string, idNumber: string };
-type Person = { givenName: boolean, lastName: boolean, idNumber: boolean };
+type FormLabel = { givenName: string; lastName: string; idNumber: string };
+type Person = { givenName: boolean; lastName: boolean; idNumber: boolean };
 
 const defaultFormLabel: FormLabel = {
   givenName: 'Given name',
   lastName: 'Last name',
-  idNumber: 'Id number'
+  idNumber: 'Id number',
 };
 const defaultPerson: Person = {
-      givenName: false,
-      lastName: false,
-      idNumber: false
-    };
+  givenName: false,
+  lastName: false,
+  idNumber: false,
+};
 
 export function createInput(opts) {
   const { type, value, name, required } = opts;
@@ -41,14 +41,14 @@ export function createLabel(value, labelFor) {
 export function createInputIfNeeded(opts) {
   const { container, name, label, shouldRender, required } = opts;
   if (!shouldRender) {
-    const inputLabel = createLabel(label, name)
-    const input = createInput({ type:'text', name, required });
+    const inputLabel = createLabel(label, name);
+    const input = createInput({ type: 'text', name, required });
     container.appendChild(inputLabel);
     container.appendChild(input);
   }
 }
 
-type Options = { formLabel: FormLabel, person: Person, submitBtnText: any };
+type Options = { formLabel: FormLabel; person: Person; submitBtnText: any };
 
 export function createTemplate(parentId: string, options: Options) {
   const { formLabel = defaultFormLabel, person = defaultPerson, submitBtnText } = options;
@@ -62,11 +62,29 @@ export function createTemplate(parentId: string, options: Options) {
   container.setAttribute('class', 'veriff-container');
   container.setAttribute('name', 'veriff-form');
 
-  createInputIfNeeded({ container, name: 'givenName', label: formLabel.givenName, shouldRender: person.givenName , required: true});
-  createInputIfNeeded({ container, name: 'lastName',  label: formLabel.lastName, shouldRender: person.lastName, required: true });
-  createInputIfNeeded({ container, name: 'idNumber',  label: formLabel.idNumber, shouldRender: person.idNumber, required: false });
+  createInputIfNeeded({
+    container,
+    name: 'givenName',
+    label: formLabel.givenName,
+    shouldRender: person.givenName,
+    required: true,
+  });
+  createInputIfNeeded({
+    container,
+    name: 'lastName',
+    label: formLabel.lastName,
+    shouldRender: person.lastName,
+    required: true,
+  });
+  createInputIfNeeded({
+    container,
+    name: 'idNumber',
+    label: formLabel.idNumber,
+    shouldRender: person.idNumber,
+    required: false,
+  });
 
-  const submit = createInput({ type:'submit', name: 'submitBtn', value: submitBtnText, required: true });
+  const submit = createInput({ type: 'submit', name: 'submitBtn', value: submitBtnText, required: true });
   container.appendChild(submit);
 
   fragment.appendChild(container);

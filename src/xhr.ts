@@ -2,7 +2,7 @@ export function createSession(host, apiKey, data, cb) {
   const url = `${host}/v1/sessions`;
   const xhr: XMLHttpRequest = new XMLHttpRequest();
   xhr.open('POST', url, true);
-  xhr.setRequestHeader('Content-type','application/json');
+  xhr.setRequestHeader('Content-type', 'application/json');
   xhr.setRequestHeader('x-auth-client', apiKey);
   xhr.onreadystatechange = () => {
     if (xhr.readyState === 4) {
@@ -10,10 +10,13 @@ export function createSession(host, apiKey, data, cb) {
         const resp = JSON.parse(xhr.responseText);
         cb(null, resp);
       } else {
-        cb({
-          status: xhr.status,
-          statusText: xhr.statusText
-        }, null);
+        cb(
+          {
+            status: xhr.status,
+            statusText: xhr.statusText,
+          },
+          null
+        );
       }
     }
   };
@@ -24,10 +27,10 @@ export function createSession(host, apiKey, data, cb) {
       person: {
         firstName: data.person.givenName,
         lastName: data.person.lastName,
-        idNumber: data.person.idNumber
+        idNumber: data.person.idNumber,
       },
-      timestamp: new Date().toISOString()
-    }
+      timestamp: new Date().toISOString(),
+    },
   };
 
   const json = JSON.stringify(body);

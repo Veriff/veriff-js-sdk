@@ -3,12 +3,13 @@ import { createTemplate } from './template';
 import { createSession } from './xhr';
 
 type Options = {
-  host?: string,
-  apiKey: string,
-  parentId: string,
-  onSession: (err, response) => void
+  host?: string;
+  apiKey: string;
+  parentId: string;
+  onSession: (err, response) => void;
 };
-type MountOptions = { formLabel?: any, submitBtnText?: string, loadingText?: string };
+
+type MountOptions = { formLabel?: any; submitBtnText?: string; loadingText?: string };
 
 const Veriff = function Veriff(options: Options) {
   const { host = 'https://api.veriff.me', apiKey, parentId, onSession } = options;
@@ -38,7 +39,7 @@ const Veriff = function Veriff(options: Options) {
           throw new Error('Required parameters givenName or lastName is missing');
         }
 
-        this.setParams({ person: { givenName, lastName, idNumber }});
+        this.setParams({ person: { givenName, lastName, idNumber } });
         form.submitBtn.value = loadingText;
         form.submitBtn.disabled = true;
         createSession(host, apiKey, this.params, (err, response) => {
@@ -46,9 +47,9 @@ const Veriff = function Veriff(options: Options) {
           form.submitBtn.value = submitBtnText;
           form.submitBtn.disabled = false;
         });
-      }
-    }
-  }
+      };
+    },
+  };
 };
 
 export = Veriff;

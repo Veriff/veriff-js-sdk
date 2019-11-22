@@ -6,7 +6,9 @@
   "scripts": {
     "build": "webpack --config webpack/webpack.config.js --mode production",
     "dev": "webpack --progress --colors --watch --config webpack/webpack.config.js",
-    "test": "./node_modules/karma/bin/karma start ./scripts/karma.conf.js"
+    "test": "./node_modules/karma/bin/karma start ./scripts/karma.conf.js",
+    "format": "prettier --write \"src/**/*.ts\" \"src/**/*.js\"",
+    "lint": "tslint -p tsconfig.json"
   },
   "author": "Ilia Aphtsiauri <ilia@veriff.me> (https://github.com/iaptsiauri) && Maksim Tsvetkov <maksim.tsvetkov@veriff.com> (https://github.com/MaxFlower)",
   "keywords": [
@@ -38,9 +40,12 @@
     "karma-mocha-reporter": "^2.2.5",
     "karma-webpack": "^2.0.13",
     "mocha": "^5.2.0",
+    "prettier": "^1.19.1",
     "sinon": "^4.5.0",
     "source-map-loader": "^0.2.4",
     "style-loader": "^0.21.0",
+    "tslint": "^5.20.1",
+    "tslint-config-prettier": "^1.18.0",
     "typescript": "^3.7.2",
     "webpack": "^4.41.2",
     "webpack-cli": "^3.3.10",
