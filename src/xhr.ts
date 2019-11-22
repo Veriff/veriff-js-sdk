@@ -27,7 +27,6 @@ export function createSession(host, apiKey, data, cb) {
       person: {
         firstName: data.person.givenName,
         lastName: data.person.lastName,
-        idNumber: data.person.idNumber,
       },
       timestamp: new Date().toISOString(),
     },

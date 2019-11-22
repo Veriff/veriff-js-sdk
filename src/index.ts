@@ -2,26 +2,30 @@ import './styles/style.css';
 import { createTemplate } from './template';
 import { createSession } from './xhr';
 
-type Options = {
+interface IOptions {
   host?: string;
   apiKey: string;
   parentId: string;
   onSession: (err, response) => void;
-};
+}
 
-type MountOptions = { formLabel?: any; submitBtnText?: string; loadingText?: string };
+interface IMountOptions {
+  formLabel?: any;
+  submitBtnText?: string;
+  loadingText?: string;
+}
 
-const Veriff = function Veriff(options: Options) {
+const Veriff = (options: IOptions) => {
   const { host = 'https://api.veriff.me', apiKey, parentId, onSession } = options;
   return {
     params: {
-      person: {},
       features: ['selfid'],
+      person: {},
     },
     setParams(newParams) {
-      this.params = (<any>Object).assign({}, this.params, newParams);
+      this.params = (Object as any).assign({}, this.params, newParams);
     },
-    mount(mountOptions: MountOptions = {}) {
+    mount(mountOptions: IMountOptions = {}) {
       const { formLabel, submitBtnText = 'Start Verification', loadingText = 'Loading...' } = mountOptions;
       const form = createTemplate(parentId, { person: this.params.person, formLabel, submitBtnText });
       form.onsubmit = (e) => {

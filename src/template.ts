@@ -1,14 +1,23 @@
 import { camelCaseToSlug } from './util';
 
-type FormLabel = { givenName: string; lastName: string; idNumber: string };
-type Person = { givenName: boolean; lastName: boolean; idNumber: boolean };
+interface IFormLabel {
+  givenName: string;
+  lastName: string;
+  idNumber: string;
+}
+interface IPerson {
+  givenName: boolean;
+  lastName: boolean;
+  idNumber: boolean;
+}
 
-const defaultFormLabel: FormLabel = {
+const defaultFormLabel: IFormLabel = {
   givenName: 'Given name',
   lastName: 'Last name',
   idNumber: 'Id number',
 };
-const defaultPerson: Person = {
+
+const defaultPerson: IPerson = {
   givenName: false,
   lastName: false,
   idNumber: false,
@@ -48,13 +57,17 @@ export function createInputIfNeeded(opts) {
   }
 }
 
-type Options = { formLabel: FormLabel; person: Person; submitBtnText: any };
+interface IOptions {
+  formLabel: IFormLabel;
+  person: IPerson;
+  submitBtnText: any;
+}
 
-export function createTemplate(parentId: string, options: Options) {
+export function createTemplate(parentId: string, options: IOptions) {
   const { formLabel = defaultFormLabel, person = defaultPerson, submitBtnText } = options;
   const parent = document.getElementById(parentId);
   if (!parent) {
-    new Error(`Element ${parentId} does not exists`);
+    throw new Error(`Element ${parentId} does not exists`);
   }
   const fragment = document.createDocumentFragment();
   const container = document.createElement('form');
