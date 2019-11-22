@@ -10,7 +10,7 @@ type Options = {
 };
 type MountOptions = { formLabel?: any, submitBtnText?: string, loadingText?: string };
 
-export default function Veriff(options: Options) {
+const Veriff = function Veriff(options: Options) {
   const { host = 'https://api.veriff.me', apiKey, parentId, onSession } = options;
   return {
     params: {
@@ -49,4 +49,6 @@ export default function Veriff(options: Options) {
       }
     }
   }
-}
+};
+
+export = Veriff;
