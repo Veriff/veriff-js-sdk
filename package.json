@@ -3,7 +3,7 @@
   "version": "0.5.0",
   "description": "JavaScript SDK for Veriff identity verification",
   "main": "lib/veriff.js",
-  "types": "lib/index.d.ts",
+  "types": "lib/src/index.d.ts",
   "scripts": {
     "build": "webpack --config webpack/webpack.config.js --mode production",
     "dev": "webpack --progress --colors --watch --config webpack/webpack.config.js",
