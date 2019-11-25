@@ -4,23 +4,27 @@ interface IFormLabel {
   givenName: string;
   lastName: string;
   idNumber: string;
+  vendorData: string;
 }
 interface IPerson {
   givenName: string | boolean;
   lastName: string | boolean;
   idNumber: string | boolean;
+  vendorData: string | boolean;
 }
 
 const defaultFormLabel: IFormLabel = {
   givenName: 'Given name',
   lastName: 'Last name',
   idNumber: 'Id number',
+  vendorData: 'Vendor data',
 };
 
 const defaultPerson: IPerson = {
   givenName: false,
   lastName: false,
   idNumber: false,
+  vendorData: false,
 };
 
 export function createInput(opts) {
@@ -34,6 +38,7 @@ export function createInput(opts) {
   input.setAttribute('class', `veriff-${type}`);
   input.setAttribute('id', `veriff-${camelCaseToSlug(name)}`);
   input.setAttribute('name', name);
+  input.setAttribute('placeholder', defaultFormLabel[name]);
   input.required = required;
   return input;
 }
@@ -94,6 +99,14 @@ export function createTemplate(parentId: string, options: IOptions) {
     name: 'idNumber',
     label: formLabel.idNumber,
     shouldRender: person.idNumber,
+    required: false,
+  });
+
+  createInputIfNeeded({
+    container,
+    name: 'vendorData',
+    label: formLabel.vendorData,
+    shouldRender: person.vendorData,
     required: false,
   });
 
