@@ -6,6 +6,6 @@ export function camelCaseToSlug(str) {
   return str.replace(/([a-zA-Z])(?=[A-Z])/g, '$1-').toLowerCase();
 }
 
-export function camelCaseHuminize(str) {
+export function camelCaseHumanize(str) {
   return this.capitalize(str.replace(/([a-zA-Z])(?=[A-Z])/g, '$1 ').toLowerCase());
 }

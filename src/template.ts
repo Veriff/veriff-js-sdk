@@ -7,24 +7,24 @@ interface IFormLabel {
   vendorData: string;
 }
 interface IPerson {
-  givenName: string | boolean;
-  lastName: string | boolean;
-  idNumber: string | boolean;
-  vendorData: string | boolean;
+  givenName: string;
+  lastName: string;
+  idNumber: string;
+  vendorData: string;
 }
 
 const defaultFormLabel: IFormLabel = {
   givenName: 'Given name',
   lastName: 'Last name',
   idNumber: 'Id number',
-  vendorData: 'Vendor data',
+  vendorData: 'Data',
 };
 
 const defaultPerson: IPerson = {
-  givenName: false,
-  lastName: false,
-  idNumber: false,
-  vendorData: true,
+  givenName: '',
+  lastName: '',
+  idNumber: '',
+  vendorData: '',
 };
 
 export function createInput(opts) {
@@ -86,7 +86,7 @@ export function createTemplate(parentId: string, options: IOptions) {
     container,
     name: 'givenName',
     label: formLabel.givenName,
-    shouldRender: person.givenName,
+    shouldRender: !!person.givenName,
     required: true,
   });
 
@@ -94,7 +94,7 @@ export function createTemplate(parentId: string, options: IOptions) {
     container,
     name: 'lastName',
     label: formLabel.lastName,
-    shouldRender: person.lastName,
+    shouldRender: !!person.lastName,
     required: true,
   });
 
@@ -102,7 +102,7 @@ export function createTemplate(parentId: string, options: IOptions) {
     container,
     name: 'idNumber',
     label: formLabel.idNumber,
-    shouldRender: person.idNumber,
+    shouldRender: !!person.idNumber,
     required: false,
   });
 
@@ -110,7 +110,7 @@ export function createTemplate(parentId: string, options: IOptions) {
     container,
     name: 'vendorData',
     label: formLabel.vendorData,
-    shouldRender: person.vendorData,
+    shouldRender: !!person.vendorData,
     required: false,
   });
 

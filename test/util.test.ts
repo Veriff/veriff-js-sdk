@@ -18,11 +18,11 @@ describe('Util', () => {
     });
   });
 
-  describe('#camelCaseHuminize', () => {
+  describe('#camelCaseHumanize', () => {
     it('should huminize the camelCase', () => {
-      expect(util.camelCaseHuminize('f')).to.eql('F');
-      expect(util.camelCaseHuminize('fooBar')).to.eql('Foo bar');
-      expect(util.camelCaseHuminize('FooBar')).to.eql('Foo bar');
+      expect(util.camelCaseHumanize('f')).to.eql('F');
+      expect(util.camelCaseHumanize('fooBar')).to.eql('Foo bar');
+      expect(util.camelCaseHumanize('FooBar')).to.eql('Foo bar');
     });
   });
 });

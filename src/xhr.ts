@@ -1,6 +1,6 @@
 export function createSession(host, apiKey, data, cb) {
   const url = `${host}/v1/sessions`;
-  const xhr: XMLHttpRequest = new XMLHttpRequest();
+  const xhr = new XMLHttpRequest();
   xhr.open('POST', url, true);
   xhr.setRequestHeader('Content-type', 'application/json');
   xhr.setRequestHeader('x-auth-client', apiKey);
@@ -23,13 +23,12 @@ export function createSession(host, apiKey, data, cb) {
 
   const body = {
     verification: {
-      features: data.features,
       person: {
         firstName: data.person.givenName,
         lastName: data.person.lastName,
         idNumber: data.person.idNumber,
-        vendorData: data.person.vendorData,
       },
+      vendorData: data.person.vendorData,
       timestamp: new Date().toISOString(),
     },
   };

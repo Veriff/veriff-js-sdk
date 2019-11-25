@@ -1,17 +1,17 @@
 {
   "name": "@veriff/js-sdk",
-  "version": "0.5.0",
+  "version": "1.0.0",
   "description": "JavaScript SDK for Veriff identity verification",
   "main": "lib/veriff.js",
   "types": "lib/src/index.d.ts",
   "scripts": {
     "build": "webpack --config webpack/webpack.config.js --mode production",
     "dev": "webpack --progress --colors --watch --config webpack/webpack.config.js",
-    "test": "jest --config jestconfig.json",
+    "test": "jest",
     "format": "prettier --write \"src/**/*.ts\" \"src/**/*.js\"",
     "lint": "tslint -p tsconfig.json"
   },
-  "author": "Ilia Aphtsiauri <ilia@veriff.me> (https://github.com/iaptsiauri) && Maksim Tsvetkov <maksim.tsvetkov@veriff.com> (https://github.com/MaxFlower)",
+  "author": "Maksim Tsvetkov <maksim.tsvetkov@veriff.com> (https://github.com/MaxFlower)",
   "keywords": [
     "veriff",
     "sdk",
@@ -19,6 +19,15 @@
     "identity",
     "verification"
   ],
+  "jest": {
+    "roots": [
+      "<rootDir>/test"
+    ],
+    "transform": {
+      "^.+\\.(ts|tsx)$": "ts-jest"
+    },
+    "testRegex": "(/__test__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?|ts?)$"
+  },
   "license": "ISC",
   "devDependencies": {
     "@babel/preset-env": "^7.7.1",
@@ -30,12 +39,10 @@
     "babel-loader": "^7.1.4",
     "babel-plugin-add-module-exports": "^0.2.1",
     "babel-preset-env": "^1.7.0",
-    "bable-loader": "0.0.1-security",
     "chai": "^4.1.2",
     "css-loader": "^0.28.11",
     "eslint": "^4.19.1",
     "eslint-loader": "^1.9.0",
-    "extract-text-webpack-plugin": "^3.0.2",
     "jasmine-core": "^2.99.1",
     "jest": "^24.9.0",
     "prettier": "^1.19.1",

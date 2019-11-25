@@ -19,11 +19,10 @@ const Veriff = (options: IOptions) => {
   const { host = 'https://api.veriff.me', apiKey, parentId, onSession } = options;
   return {
     params: {
-      features: ['selfid'],
       person: {},
     },
     setParams(newParams) {
-      this.params = (Object as any).assign({}, this.params, newParams);
+      this.params = { ...this.params, ...newParams };
     },
     mount(mountOptions: IMountOptions = {}) {
       const { formLabel, submitBtnText = 'Start Verification', loadingText = 'Loading...' } = mountOptions;
@@ -36,10 +35,6 @@ const Veriff = (options: IOptions) => {
         const lastName = form.lastName ? form.lastName.value : this.params.person.lastName;
         const idNumber = form.idNumber ? form.idNumber.value : this.params.person.idNumber;
         const vendorData = form.vendorData ? form.vendorData.value : this.params.person.vendorData;
-
-        if (!this.params.features || !(this.params.features instanceof Array)) {
-          throw new Error('Session features array is required');
-        }
 
         if (!givenName || !lastName) {
           throw new Error('Required parameters givenName or lastName is missing');

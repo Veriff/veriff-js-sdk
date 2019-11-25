@@ -1,9 +1,0 @@
-{
-  "roots": [
-    "<rootDir>/test"
-  ],
-  "transform": {
-    "^.+\\.(ts|tsx)$": "ts-jest"
-  },
-  "testRegex": "(/__test__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?|ts?)$"
-}
