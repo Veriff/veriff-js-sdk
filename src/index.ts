@@ -28,12 +28,14 @@ const Veriff = (options: IOptions) => {
     mount(mountOptions: IMountOptions = {}) {
       const { formLabel, submitBtnText = 'Start Verification', loadingText = 'Loading...' } = mountOptions;
       const form = createTemplate(parentId, { person: this.params.person, formLabel, submitBtnText });
+
       form.onsubmit = (e) => {
         e.preventDefault();
 
         const givenName = form.givenName ? form.givenName.value : this.params.person.givenName;
         const lastName = form.lastName ? form.lastName.value : this.params.person.lastName;
         const idNumber = form.idNumber ? form.idNumber.value : this.params.person.idNumber;
+        const vendorData = form.vendorData ? form.vendorData.value : this.params.person.vendorData;
 
         if (!this.params.features || !(this.params.features instanceof Array)) {
           throw new Error('Session features array is required');
@@ -43,7 +45,7 @@ const Veriff = (options: IOptions) => {
           throw new Error('Required parameters givenName or lastName is missing');
         }
 
-        this.setParams({ person: { givenName, lastName, idNumber } });
+        this.setParams({ person: { givenName, lastName, idNumber, vendorData } });
         form.submitBtn.value = loadingText;
         form.submitBtn.disabled = true;
         createSession(host, apiKey, this.params, (err, response) => {

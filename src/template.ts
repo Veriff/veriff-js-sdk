@@ -24,7 +24,7 @@ const defaultPerson: IPerson = {
   givenName: false,
   lastName: false,
   idNumber: false,
-  vendorData: false,
+  vendorData: true,
 };
 
 export function createInput(opts) {
@@ -38,7 +38,9 @@ export function createInput(opts) {
   input.setAttribute('class', `veriff-${type}`);
   input.setAttribute('id', `veriff-${camelCaseToSlug(name)}`);
   input.setAttribute('name', name);
-  input.setAttribute('placeholder', defaultFormLabel[name]);
+  if (defaultFormLabel[name]) {
+    input.setAttribute('placeholder', defaultFormLabel[name]);
+  }
   input.required = required;
   return input;
 }
@@ -87,6 +89,7 @@ export function createTemplate(parentId: string, options: IOptions) {
     shouldRender: person.givenName,
     required: true,
   });
+
   createInputIfNeeded({
     container,
     name: 'lastName',
@@ -94,6 +97,7 @@ export function createTemplate(parentId: string, options: IOptions) {
     shouldRender: person.lastName,
     required: true,
   });
+
   createInputIfNeeded({
     container,
     name: 'idNumber',
