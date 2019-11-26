@@ -64,6 +64,24 @@ export function createInputIfNeeded(opts) {
   }
 }
 
+export function createDescription() {
+  const companyLink = document.createElement('a');
+  const linkText = document.createTextNode('Veriff');
+  const descriptionText = document.createTextNode(
+    ' is an identity verification provider that helps companies connect with customers.'
+  );
+  companyLink.appendChild(linkText);
+  companyLink.title = 'Veriff';
+  companyLink.href = 'https://www.veriff.com/';
+  companyLink.target = '_blank';
+  const description = document.createElement('p');
+  description.appendChild(companyLink);
+  description.appendChild(descriptionText);
+  description.setAttribute('class', 'veriff-description');
+
+  return description;
+}
+
 interface IOptions {
   formLabel?: IFormLabel;
   person?: IPerson;
@@ -116,6 +134,9 @@ export function createTemplate(parentId: string, options: IOptions) {
 
   const submit = createInput({ type: 'submit', name: 'submitBtn', value: submitBtnText, required: true });
   container.appendChild(submit);
+
+  const description = createDescription();
+  container.appendChild(description);
 
   fragment.appendChild(container);
   parent.appendChild(fragment);

@@ -72,3 +72,17 @@
 .veriff-submit:focus {
   transform: translateY(-2px);
 }
+
+.veriff-description {
+  color: #505366;
+  font-size: 12px;
+  line-height: 16px;
+  margin: 16px 0;
+}
+
+.veriff-description a {
+  font-weight: 400;
+  font-size: 12px;
+  color: #006379;
+  text-align: center;
+}
