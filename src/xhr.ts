@@ -1,3 +1,5 @@
+const CREATED_RESPONSE_STATUS = 201;
+
 export function createSession(host, apiKey, data, cb) {
   const url = `${host}/v1/sessions`;
   const xhr = new XMLHttpRequest();
@@ -5,8 +7,8 @@ export function createSession(host, apiKey, data, cb) {
   xhr.setRequestHeader('Content-type', 'application/json');
   xhr.setRequestHeader('x-auth-client', apiKey);
   xhr.onreadystatechange = () => {
-    if (xhr.readyState === 4) {
-      if (xhr.status === 201) {
+    if (xhr.readyState === XMLHttpRequest.DONE) {
+      if (xhr.status === CREATED_RESPONSE_STATUS) {
         const resp = JSON.parse(xhr.responseText);
         cb(null, resp);
       } else {

@@ -27,7 +27,14 @@ const defaultPerson: IPerson = {
   vendorData: '',
 };
 
-export function createInput(opts) {
+export interface IInputCreationOptions {
+  type: string;
+  value?: string;
+  name: string;
+  required: boolean;
+}
+
+export function createInput(opts: IInputCreationOptions) {
   const { type, value, name, required } = opts;
   const input = document.createElement('input');
   input.setAttribute('type', type);
@@ -42,6 +49,7 @@ export function createInput(opts) {
     input.setAttribute('placeholder', defaultFormLabel[name]);
   }
   input.required = required;
+
   return input;
 }
 
@@ -54,7 +62,15 @@ export function createLabel(value, labelFor) {
   return label;
 }
 
-export function createInputIfNeeded(opts) {
+export interface ICreationOptions {
+  container: HTMLFormElement;
+  name: string;
+  label: string;
+  shouldRender: boolean;
+  required: boolean;
+}
+
+export function createInputIfNeeded(opts: ICreationOptions) {
   const { container, name, label, shouldRender, required } = opts;
   if (!shouldRender) {
     const inputLabel = createLabel(label, name);
@@ -67,14 +83,15 @@ export function createInputIfNeeded(opts) {
 export function createDescription() {
   const companyLink = document.createElement('a');
   const linkText = document.createTextNode('Veriff');
-  const descriptionText = document.createTextNode(
-    ' is an identity verification provider that helps companies connect with customers.'
-  );
   companyLink.appendChild(linkText);
   companyLink.title = 'Veriff';
   companyLink.href = 'https://www.veriff.com/';
   companyLink.target = '_blank';
+
   const description = document.createElement('p');
+  const descriptionText = document.createTextNode(
+    ' is an identity verification provider that helps companies connect with customers.'
+  );
   description.appendChild(companyLink);
   description.appendChild(descriptionText);
   description.setAttribute('class', 'veriff-description');
@@ -82,7 +99,7 @@ export function createDescription() {
   return description;
 }
 
-interface IOptions {
+export interface IOptions {
   formLabel?: IFormLabel;
   person?: IPerson;
   submitBtnText?: string;

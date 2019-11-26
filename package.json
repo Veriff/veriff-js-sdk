@@ -11,7 +11,10 @@
     "format": "prettier --write \"src/**/*.ts\" \"src/**/*.js\"",
     "lint": "tslint -p tsconfig.json"
   },
-  "author": "Maksim Tsvetkov <maksim.tsvetkov@veriff.com> (https://github.com/MaxFlower)",
+  "author": "Ilia Aphtsiauri <ilia@veriff.me> (https://github.com/iaptsiauri)",
+  "contributors": [
+    "Maksim Tsvetkov <maksim.tsvetkov@veriff.com> (https://github.com/MaxFlower)"
+  ],
   "keywords": [
     "veriff",
     "sdk",
