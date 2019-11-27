@@ -2,7 +2,7 @@ import { IPersonData } from './template';
 
 const CREATED_RESPONSE_STATUS = 201;
 
-export function createSession<ICreationSession>(
+export function createSession(
   host: string,
   apiKey: string,
   data: { person?: IPersonData; vendorData?: string },
@@ -13,6 +13,7 @@ export function createSession<ICreationSession>(
   xhr.open('POST', url, true);
   xhr.setRequestHeader('Content-type', 'application/json');
   xhr.setRequestHeader('x-auth-client', apiKey);
+  xhr.setRequestHeader('x-origin', 'js-sdk');
   xhr.onreadystatechange = () => {
     if (xhr.readyState === XMLHttpRequest.DONE) {
       if (xhr.status === CREATED_RESPONSE_STATUS) {

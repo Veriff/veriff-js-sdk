@@ -1,4 +1,7 @@
 // @ts-ignore
+import { IPersonData } from '../src/template';
+
+// @ts-ignore
 const sinon = require('sinon');
 import { should } from 'chai';
 import { createSession } from '../src/xhr';
@@ -24,8 +27,7 @@ afterEach(() => {
 describe('Veriff create session', () => {
   it('should submit the verification data', (done) => {
     const responseData = JSON.stringify({ url: 'test' });
-    const requestData = {
-      features: [],
+    const requestData: { person?: IPersonData; vendorData?: string; env: string } = {
       person: {
         givenName: 'test',
         lastName: 'test',

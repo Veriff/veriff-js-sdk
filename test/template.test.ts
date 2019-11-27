@@ -22,7 +22,7 @@ describe('Veriff create template', () => {
   });
 
   it('should create partial template', () => {
-    createTemplate('veriff-root', { person: { lastName: '', idNumber: '', givenName: 'foo', vendorData: '' } });
+    createTemplate('veriff-root', { person: { lastName: '', idNumber: '', givenName: 'foo' }, vendorData: '' });
     expect(document.querySelector('.veriff-container')).to.exist;
     expect(document.getElementById('veriff-label-given-name')).not.to.not.exist;
     expect(document.getElementById('veriff-given-name')).not.to.exist;

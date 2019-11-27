@@ -5,9 +5,9 @@ interface IFormLabel {
 }
 
 export interface IPersonData {
-  givenName: string;
-  lastName: string;
-  idNumber: string;
+  givenName?: string;
+  lastName?: string;
+  idNumber?: string;
 }
 
 const defaultFormLabel: IFormLabel = {
