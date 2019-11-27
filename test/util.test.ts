@@ -17,12 +17,4 @@ describe('Util', () => {
       expect(util.camelCaseToSlug('FooBar')).to.eql('foo-bar');
     });
   });
-
-  describe('#camelCaseHumanize', () => {
-    it('should huminize the camelCase', () => {
-      expect(util.camelCaseHumanize('f')).to.eql('F');
-      expect(util.camelCaseHumanize('fooBar')).to.eql('Foo bar');
-      expect(util.camelCaseHumanize('FooBar')).to.eql('Foo bar');
-    });
-  });
 });
