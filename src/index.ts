@@ -42,10 +42,10 @@ const Veriff = (options: IOptions) => {
       form.onsubmit = (e) => {
         e.preventDefault();
 
-        const givenName = form.givenName ? form.givenName.value : this.params.person.givenName;
-        const lastName = form.lastName ? form.lastName.value : this.params.person.lastName;
-        const idNumber = form.idNumber ? form.idNumber.value : this.params.person.idNumber;
-        const vendorData = form.vendorData ? form.vendorData.value : this.params.vendorData;
+        const givenName = form.givenName?.value || this.params.person.givenName;
+        const lastName = form.lastName?.value || this.params.person.lastName;
+        const idNumber = form.idNumber?.value || this.params.person.idNumber;
+        const vendorData = form.vendorData?.value || this.params.vendorData;
 
         if (!givenName || !lastName) {
           throw new Error('Required parameters givenName or lastName is missing');
