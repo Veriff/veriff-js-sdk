@@ -44,7 +44,7 @@ const Veriff = (options: IOptions) => {
 
         const givenName = form.givenName?.value || this.params.person.givenName;
         const lastName = form.lastName?.value || this.params.person.lastName;
-        const idNumber = form.idNumber?.value || this.params.person.idNumber;
+        const idNumber = this.params.person.idNumber;
         const vendorData = form.vendorData?.value || this.params.vendorData;
 
         if (!givenName || !lastName) {

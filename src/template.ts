@@ -133,14 +133,6 @@ export function createTemplate(parentId: string, options: IOptions) {
 
   createInputIfNeeded({
     container,
-    name: 'idNumber',
-    label: formLabel.idNumber,
-    shouldRender: !person.idNumber,
-    required: false,
-  });
-
-  createInputIfNeeded({
-    container,
     name: 'vendorData',
     label: formLabel.vendorData,
     shouldRender: !vendorData,

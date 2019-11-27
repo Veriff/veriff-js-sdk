@@ -15,20 +15,20 @@ export function createSession(
   xhr.setRequestHeader('x-auth-client', apiKey);
   xhr.setRequestHeader('x-origin', 'js-sdk');
   xhr.onreadystatechange = () => {
-    if (xhr.readyState === XMLHttpRequest.DONE) {
-      if (xhr.status === CREATED_RESPONSE_STATUS) {
-        const resp = JSON.parse(xhr.responseText);
-        cb(null, resp);
-      } else {
-        cb(
-          {
-            status: xhr.status,
-            statusText: xhr.statusText,
-          },
-          null
-        );
-      }
+    if (xhr.readyState !== XMLHttpRequest.DONE) {
+      return;
     }
+    if (xhr.status === CREATED_RESPONSE_STATUS) {
+      const resp = JSON.parse(xhr.responseText);
+      return cb(null, resp);
+    }
+    return cb(
+      {
+        status: xhr.status,
+        statusText: xhr.statusText,
+      },
+      null
+    );
   };
 
   const body = {
