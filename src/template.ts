@@ -27,24 +27,24 @@ export interface InputCreationOptions {
   type: string;
   value?: string;
   name: string;
+  label?: string;
   required: boolean;
 }
 
 export function createInput(opts: InputCreationOptions) {
-  const { type, value, name, required } = opts;
+  const { type, value, name, label, required } = opts;
   const input = document.createElement('input');
   input.setAttribute('type', type);
-  if (type === 'submit' && value) {
-    input.value = value;
-  }
-
   input.setAttribute('class', `veriff-${type}`);
   input.setAttribute('id', `veriff-${camelCaseToSlug(name)}`);
   input.setAttribute('name', name);
-  if (defaultFormLabel[name]) {
-    input.setAttribute('placeholder', defaultFormLabel[name]);
-  }
   input.required = required;
+
+  if (type === 'submit' && value) {
+    input.value = value;
+  } else {
+    input.setAttribute('placeholder', label || defaultFormLabel[name]);
+  }
 
   return input;
 }
@@ -70,7 +70,7 @@ export function createInputIfNeeded(opts: CreationOptions) {
   const { container, name, label, shouldRender, required } = opts;
   if (shouldRender) {
     const inputLabel = createLabel(label, name);
-    const input = createInput({ type: 'text', name, required });
+    const input = createInput({ type: 'text', name, label, required });
     container.appendChild(inputLabel);
     container.appendChild(input);
   }

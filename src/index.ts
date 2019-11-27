@@ -31,10 +31,7 @@ const Veriff = (options: Options) => {
     },
     updateParams(newParams: Params): void {
       this.params = { ...newParams };
-      this.form = createTemplate(parentId, {
-        person: this.params.person,
-        vendorData: this.params.vendorData,
-      });
+      this.form = createTemplate(parentId, { ...newParams });
       this.form = this.assignSubmit(this.form);
     },
     form: this.form,
