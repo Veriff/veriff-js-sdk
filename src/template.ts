@@ -1,16 +1,13 @@
 import { camelCaseToSlug } from './util';
 
 interface IFormLabel {
-  givenName: string;
-  lastName: string;
-  idNumber: string;
-  vendorData: string;
+  [P: string]: string;
 }
-interface IPerson {
+
+export interface IPersonData {
   givenName: string;
   lastName: string;
   idNumber: string;
-  vendorData: string;
 }
 
 const defaultFormLabel: IFormLabel = {
@@ -20,11 +17,10 @@ const defaultFormLabel: IFormLabel = {
   vendorData: 'Data',
 };
 
-const defaultPerson: IPerson = {
+const defaultPerson: IPersonData = {
   givenName: '',
   lastName: '',
   idNumber: '',
-  vendorData: '',
 };
 
 export interface IInputCreationOptions {
@@ -72,7 +68,7 @@ export interface ICreationOptions {
 
 export function createInputIfNeeded(opts: ICreationOptions) {
   const { container, name, label, shouldRender, required } = opts;
-  if (!shouldRender) {
+  if (shouldRender) {
     const inputLabel = createLabel(label, name);
     const input = createInput({ type: 'text', name, required });
     container.appendChild(inputLabel);
@@ -101,16 +97,18 @@ export function createDescription() {
 
 export interface IOptions {
   formLabel?: IFormLabel;
-  person?: IPerson;
+  person?: IPersonData;
+  vendorData?: string;
   submitBtnText?: string;
 }
 
 export function createTemplate(parentId: string, options: IOptions) {
-  const { formLabel = defaultFormLabel, person = defaultPerson, submitBtnText } = options;
+  const { formLabel = defaultFormLabel, person = defaultPerson, vendorData, submitBtnText } = options;
   const parent = document.getElementById(parentId);
   if (!parent) {
     throw new Error(`Element ${parentId} does not exists`);
   }
+  parent.innerHTML = '';
   const fragment = document.createDocumentFragment();
   const container = document.createElement('form');
 
@@ -121,7 +119,7 @@ export function createTemplate(parentId: string, options: IOptions) {
     container,
     name: 'givenName',
     label: formLabel.givenName,
-    shouldRender: !!person.givenName,
+    shouldRender: !person.givenName,
     required: true,
   });
 
@@ -129,7 +127,7 @@ export function createTemplate(parentId: string, options: IOptions) {
     container,
     name: 'lastName',
     label: formLabel.lastName,
-    shouldRender: !!person.lastName,
+    shouldRender: !person.lastName,
     required: true,
   });
 
@@ -137,7 +135,7 @@ export function createTemplate(parentId: string, options: IOptions) {
     container,
     name: 'idNumber',
     label: formLabel.idNumber,
-    shouldRender: !!person.idNumber,
+    shouldRender: !person.idNumber,
     required: false,
   });
 
@@ -145,7 +143,7 @@ export function createTemplate(parentId: string, options: IOptions) {
     container,
     name: 'vendorData',
     label: formLabel.vendorData,
-    shouldRender: !!person.vendorData,
+    shouldRender: !vendorData,
     required: false,
   });
 

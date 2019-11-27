@@ -1,6 +1,13 @@
+import { IPersonData } from './template';
+
 const CREATED_RESPONSE_STATUS = 201;
 
-export function createSession(host, apiKey, data, cb) {
+export function createSession<ICreationSession>(
+  host: string,
+  apiKey: string,
+  data: { person?: IPersonData; vendorData?: string },
+  cb: (statusObject, resp) => void
+): void {
   const url = `${host}/v1/sessions`;
   const xhr = new XMLHttpRequest();
   xhr.open('POST', url, true);
@@ -30,7 +37,7 @@ export function createSession(host, apiKey, data, cb) {
         lastName: data.person.lastName,
         idNumber: data.person.idNumber,
       },
-      vendorData: data.person.vendorData,
+      vendorData: data.vendorData,
       timestamp: new Date().toISOString(),
     },
   };
