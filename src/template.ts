@@ -1,36 +1,36 @@
 import { camelCaseToSlug } from './util';
 
-interface IFormLabel {
+export interface FormLabel {
   [P: string]: string;
 }
 
-export interface IPersonData {
+export interface PersonData {
   givenName?: string;
   lastName?: string;
   idNumber?: string;
 }
 
-const defaultFormLabel: IFormLabel = {
+const defaultFormLabel: FormLabel = {
   givenName: 'Given name',
   lastName: 'Last name',
   idNumber: 'Id number',
   vendorData: 'Data',
 };
 
-const defaultPerson: IPersonData = {
+const defaultPerson: PersonData = {
   givenName: '',
   lastName: '',
   idNumber: '',
 };
 
-export interface IInputCreationOptions {
+export interface InputCreationOptions {
   type: string;
   value?: string;
   name: string;
   required: boolean;
 }
 
-export function createInput(opts: IInputCreationOptions) {
+export function createInput(opts: InputCreationOptions) {
   const { type, value, name, required } = opts;
   const input = document.createElement('input');
   input.setAttribute('type', type);
@@ -58,7 +58,7 @@ export function createLabel(value, labelFor) {
   return label;
 }
 
-export interface ICreationOptions {
+export interface CreationOptions {
   container: HTMLFormElement;
   name: string;
   label: string;
@@ -66,7 +66,7 @@ export interface ICreationOptions {
   required: boolean;
 }
 
-export function createInputIfNeeded(opts: ICreationOptions) {
+export function createInputIfNeeded(opts: CreationOptions) {
   const { container, name, label, shouldRender, required } = opts;
   if (shouldRender) {
     const inputLabel = createLabel(label, name);
@@ -95,14 +95,14 @@ export function createDescription() {
   return description;
 }
 
-export interface IOptions {
-  formLabel?: IFormLabel;
-  person?: IPersonData;
+export interface Options {
+  formLabel?: FormLabel;
+  person?: PersonData;
   vendorData?: string;
   submitBtnText?: string;
 }
 
-export function createTemplate(parentId: string, options: IOptions) {
+export function createTemplate(parentId: string, options: Options) {
   const { formLabel = defaultFormLabel, person = defaultPerson, vendorData, submitBtnText } = options;
   const parent = document.getElementById(parentId);
   if (!parent) {

@@ -1,35 +1,35 @@
 import './styles/style.css';
-import { createTemplate, IPersonData } from './template';
+import { createTemplate, PersonData, FormLabel } from './template';
 import { createSession } from './xhr';
 
-interface IOptions {
+interface Options {
   host?: string;
   apiKey: string;
   parentId: string;
   onSession: (err, response) => void;
 }
 
-interface IMountOptions {
-  formLabel?: any;
+interface MountOptions {
+  formLabel?: FormLabel;
   submitBtnText?: string;
   loadingText?: string;
 }
 
-interface IParams {
-  person?: IPersonData;
+interface Params {
+  person?: PersonData;
   vendorData?: string;
 }
 
-const Veriff = (options: IOptions) => {
+const Veriff = (options: Options) => {
   const { host = 'https://api.veriff.me', apiKey, parentId, onSession } = options;
   return {
     params: {
       person: {},
     },
-    setParams(newParams: IParams) {
+    setParams(newParams: Params): void {
       this.params = { ...this.params, ...newParams };
     },
-    updateParams(newParams: IParams) {
+    updateParams(newParams: Params): void {
       this.params = { ...newParams };
       this.form = createTemplate(parentId, {
         person: this.params.person,
@@ -38,13 +38,13 @@ const Veriff = (options: IOptions) => {
       this.form = this.assignSubmit(this.form);
     },
     form: this.form,
-    assignSubmit(form, loadingText = 'Loading...', submitBtnText = 'Start Verification') {
+    assignSubmit(form, loadingText = 'Loading...', submitBtnText = 'Start Verification'): void {
       form.onsubmit = (e) => {
         e.preventDefault();
 
         const givenName = form.givenName?.value || this.params.person.givenName;
         const lastName = form.lastName?.value || this.params.person.lastName;
-        const idNumber = this.params.person.idNumber;
+        const idNumber = this.params.person?.idNumber;
         const vendorData = form.vendorData?.value || this.params.vendorData;
 
         if (!givenName || !lastName) {
@@ -63,7 +63,7 @@ const Veriff = (options: IOptions) => {
 
       return form;
     },
-    mount(mountOptions: IMountOptions = {}) {
+    mount(mountOptions: MountOptions = {}): void {
       const { formLabel, loadingText, submitBtnText } = mountOptions;
       const form = createTemplate(parentId, {
         person: this.params.person,

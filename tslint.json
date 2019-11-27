@@ -1,9 +1,0 @@
-{
-  "extends": ["tslint:recommended", "tslint-config-prettier"],
-  "rules": {
-    "object-literal-sort-keys": false,
-    "no-unused-expression": false,
-    "only-arrow-functions": false,
-    "no-var-requires": false
-  }
-}

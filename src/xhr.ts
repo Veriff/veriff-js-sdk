@@ -1,11 +1,11 @@
-import { IPersonData } from './template';
+import { PersonData } from './template';
 
 const CREATED_RESPONSE_STATUS = 201;
 
 export function createSession(
   host: string,
   apiKey: string,
-  data: { person?: IPersonData; vendorData?: string },
+  data: { person?: PersonData; vendorData?: string },
   cb: (statusObject, resp) => void
 ): void {
   const url = `${host}/v1/sessions`;
@@ -14,7 +14,7 @@ export function createSession(
   xhr.setRequestHeader('Content-type', 'application/json');
   xhr.setRequestHeader('x-auth-client', apiKey);
   xhr.setRequestHeader('x-origin', 'js-sdk');
-  xhr.onreadystatechange = () => {
+  xhr.onreadystatechange = (): void => {
     if (xhr.readyState !== XMLHttpRequest.DONE) {
       return;
     }
