@@ -29,10 +29,11 @@ const Veriff = (options: Options) => {
     setParams(newParams: Params): void {
       this.params = { ...this.params, ...newParams };
     },
-    updateParams(newParams: Params): void {
+    updateParams(newParams: Params, mountOptions: MountOptions): void {
       this.params = { ...newParams };
-      this.form = createTemplate(parentId, { ...newParams });
-      this.form = this.assignSubmit(this.form);
+      const { formLabel, loadingText, submitBtnText } = mountOptions;
+      this.form = createTemplate(parentId, { ...newParams, formLabel, submitBtnText });
+      this.form = this.assignSubmit(this.form, loadingText, submitBtnText);
     },
     form: this.form,
     assignSubmit(form, loadingText = 'Loading...', submitBtnText = 'Start Verification'): void {
