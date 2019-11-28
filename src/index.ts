@@ -29,7 +29,7 @@ const Veriff = (options: Options) => {
     setParams(newParams: Params): void {
       this.params = { ...this.params, ...newParams };
     },
-    updateParams(newParams: Params, mountOptions: MountOptions): void {
+    updateParams(newParams: Params, mountOptions: MountOptions = {}): void {
       this.params = { ...newParams };
       const { formLabel, loadingText, submitBtnText } = mountOptions;
       this.form = createTemplate(parentId, { ...newParams, formLabel, submitBtnText });
