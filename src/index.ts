@@ -22,56 +22,66 @@ interface Params {
 
 const Veriff = (options: Options) => {
   const { host = 'https://api.veriff.me', apiKey, parentId, onSession } = options;
-  return {
-    params: {
-      person: {},
-    },
-    setParams(newParams: Params): void {
-      this.params = { ...this.params, ...newParams };
-    },
-    updateParams(newParams: Params, mountOptions: MountOptions = {}): void {
-      this.params = { ...newParams };
-      const { formLabel, loadingText, submitBtnText } = mountOptions;
-      this.form = createTemplate(parentId, { ...newParams, formLabel, submitBtnText });
-      this.form = this.assignSubmit(this.form, loadingText, submitBtnText);
-    },
-    form: this.form,
-    assignSubmit(form, loadingText = 'Loading...', submitBtnText = 'Start Verification'): void {
-      form.onsubmit = (e) => {
-        e.preventDefault();
+  let params: Params = {
+    person: {},
+  };
+  let veriffForm: HTMLFormElement;
 
-        const givenName = form.givenName?.value || this.params.person.givenName;
-        const lastName = form.lastName?.value || this.params.person.lastName;
-        const idNumber = this.params.person?.idNumber;
-        const vendorData = form.vendorData?.value || this.params.vendorData;
+  function setParams(newParams: Params): void {
+    params = { ...params, ...newParams };
+  }
 
-        if (!givenName || !lastName) {
-          throw new Error('Required parameters givenName or lastName is missing');
-        }
+  function assignSubmit(form, loadingText = 'Loading...', submitBtnText = 'Start Verification'): HTMLFormElement {
+    form.onsubmit = (e) => {
+      e.preventDefault();
 
-        this.setParams({ person: { givenName, lastName, idNumber }, vendorData });
-        form.submitBtn.value = loadingText;
-        form.submitBtn.disabled = true;
-        createSession(host, apiKey, this.params, (err, response) => {
-          onSession(err, response);
-          form.submitBtn.value = submitBtnText;
-          form.submitBtn.disabled = false;
-        });
-      };
+      const givenName = veriffForm.givenName?.value || params.person.givenName;
+      const lastName = veriffForm.lastName?.value || params.person.lastName;
+      const idNumber = params.person?.idNumber;
+      const vendorData =
+        typeof veriffForm.vendorData?.value === 'string' ? veriffForm.vendorData?.value : params.vendorData;
 
-      return form;
-    },
-    mount(mountOptions: MountOptions = {}): void {
-      const { formLabel, loadingText, submitBtnText } = mountOptions;
-      const form = createTemplate(parentId, {
-        person: this.params.person,
-        vendorData: this.params.vendorData,
-        formLabel,
-        submitBtnText,
+      if (!givenName || !lastName) {
+        throw new Error('Required parameters givenName or lastName is missing');
+      }
+
+      setParams({ person: { givenName, lastName, idNumber }, vendorData });
+      form.submitBtn.value = loadingText;
+      form.submitBtn.disabled = true;
+      createSession(host, apiKey, params, (err, response) => {
+        onSession(err, response);
+        form.submitBtn.value = submitBtnText;
+        form.submitBtn.disabled = false;
       });
+    };
 
-      this.form = this.assignSubmit(form, loadingText, submitBtnText);
-    },
+    return form;
+  }
+
+  function updateParams(newParams: Params, mountOptions: MountOptions = {}): void {
+    params = { ...newParams };
+    const { formLabel, loadingText, submitBtnText } = mountOptions;
+    const form = createTemplate(parentId, { ...newParams, formLabel, submitBtnText });
+    veriffForm = assignSubmit(form, loadingText, submitBtnText);
+  }
+
+  function mount(mountOptions: MountOptions = {}): void {
+    const { formLabel, loadingText, submitBtnText } = mountOptions;
+    const form = createTemplate(parentId, {
+      person: params.person,
+      vendorData: params.vendorData,
+      formLabel,
+      submitBtnText,
+    });
+
+    veriffForm = assignSubmit(form, loadingText, submitBtnText);
+  }
+
+  return {
+    params: params,
+    setParams: setParams,
+    updateParams: updateParams,
+    mount: mount,
   };
 };
 
