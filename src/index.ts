@@ -22,6 +22,8 @@ interface Params {
 
 const Veriff = (options: Options) => {
   const { host = 'https://api.veriff.me', apiKey, parentId, onSession } = options;
+  let onSessionCallback = onSession;
+  let mountedOptions: MountOptions = { loadingText: 'Loading...', submitBtnText: 'Start Verification' };
   let params: Params = {
     person: {},
   };
@@ -31,7 +33,7 @@ const Veriff = (options: Options) => {
     params = { ...params, ...newParams };
   }
 
-  function assignSubmit(form, loadingText = 'Loading...', submitBtnText = 'Start Verification'): HTMLFormElement {
+  function assignSubmit(form, loadingText = 'Loading...', submitBtnText): HTMLFormElement {
     form.onsubmit = (e) => {
       e.preventDefault();
 
@@ -49,7 +51,7 @@ const Veriff = (options: Options) => {
       form.submitBtn.value = loadingText;
       form.submitBtn.disabled = true;
       createSession(host, apiKey, params, (err, response) => {
-        onSession(err, response);
+        onSessionCallback(err, response);
         form.submitBtn.value = submitBtnText;
         form.submitBtn.disabled = false;
       });
@@ -58,15 +60,20 @@ const Veriff = (options: Options) => {
     return form;
   }
 
-  function updateParams(newParams: Params, mountOptions: MountOptions = {}): void {
+  function updateParams(newParams: Params, mountOptions: MountOptions = {}, onSession?): void {
+    if (onSession) {
+      onSessionCallback = onSession;
+    }
     params = { ...newParams };
-    const { formLabel, loadingText, submitBtnText } = mountOptions;
+    mountedOptions = { ...mountedOptions, ...mountOptions };
+    const { formLabel, loadingText, submitBtnText } = mountedOptions;
     const form = createTemplate(parentId, { ...newParams, formLabel, submitBtnText });
     veriffForm = assignSubmit(form, loadingText, submitBtnText);
   }
 
   function mount(mountOptions: MountOptions = {}): void {
-    const { formLabel, loadingText, submitBtnText } = mountOptions;
+    mountedOptions = { ...mountedOptions, ...mountOptions };
+    const { formLabel, loadingText, submitBtnText } = mountedOptions;
     const form = createTemplate(parentId, {
       person: params.person,
       vendorData: params.vendorData,
