@@ -22,7 +22,7 @@ interface Params {
 
 const Veriff = (options: Options) => {
   const { host = 'https://api.veriff.me', apiKey, parentId, onSession } = options;
-  let onSessionCallback = onSession;
+  const onSessionCallback = onSession;
   let mountedOptions: MountOptions = { loadingText: 'Loading...', submitBtnText: 'Start Verification' };
   let params: Params = {
     person: {},
@@ -62,23 +62,13 @@ const Veriff = (options: Options) => {
     return form;
   }
 
-  function updateParams(newParams: Params, mountOptions: MountOptions = {}, onSession?): void {
-    if (onSession) {
-      onSessionCallback = onSession;
-    }
-    params = { ...newParams };
-    mountedOptions = { ...mountedOptions, ...mountOptions };
-    const { formLabel, loadingText, submitBtnText } = mountedOptions;
-    const form = createTemplate(parentId, { ...newParams, formLabel, submitBtnText });
-    veriffForm = assignSubmit(form, loadingText, submitBtnText);
-  }
-
   function mount(mountOptions: MountOptions = {}): void {
     mountedOptions = { ...mountedOptions, ...mountOptions };
     const { formLabel, loadingText, submitBtnText } = mountedOptions;
+    const { person, vendorData } = params;
     const form = createTemplate(parentId, {
-      person: params.person,
-      vendorData: params.vendorData,
+      person,
+      vendorData,
       formLabel,
       submitBtnText,
     });
@@ -87,10 +77,9 @@ const Veriff = (options: Options) => {
   }
 
   return {
-    params: params,
-    setParams: setParams,
-    updateParams: updateParams,
-    mount: mount,
+    params,
+    setParams,
+    mount,
   };
 };
 
