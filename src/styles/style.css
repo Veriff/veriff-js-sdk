@@ -1,6 +1,5 @@
 .veriff-container {
-  margin-top: 80px;
-  width: 256px;
+  min-width: 208px;
 }
 
 .veriff-label {
