@@ -51,7 +51,9 @@ const Veriff = (options: Options) => {
       form.submitBtn.value = loadingText;
       form.submitBtn.disabled = true;
       createSession(host, apiKey, params, (err, response) => {
-        onSessionCallback(err, response);
+        if (onSessionCallback) {
+          onSessionCallback(err, response);
+        }
         form.submitBtn.value = submitBtnText;
         form.submitBtn.disabled = false;
       });
