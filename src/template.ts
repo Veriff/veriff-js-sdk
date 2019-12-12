@@ -49,7 +49,7 @@ export function createInput(opts: InputCreationOptions) {
   return input;
 }
 
-export function createLabel(value, labelFor) {
+export function createLabel(value = '', labelFor) {
   const label = document.createElement('label');
   label.setAttribute('class', `veriff-label`);
   label.setAttribute('id', `veriff-label-${camelCaseToSlug(labelFor)}`);
@@ -71,6 +71,10 @@ export function createInputIfNeeded(opts: CreationOptions) {
   if (shouldRender) {
     const inputLabel = createLabel(label, name);
     const input = createInput({ type: 'text', name, label, required });
+    if (name === 'vendorData') {
+      input.setAttribute('maxlength', '40');
+    }
+
     container.appendChild(inputLabel);
     container.appendChild(input);
   }
@@ -136,7 +140,7 @@ export function createTemplate(parentId: string, options: Options) {
     name: 'vendorData',
     label: formLabel.vendorData,
     shouldRender: !vendorData,
-    required: false,
+    required: true,
   });
 
   const submit = createInput({ type: 'submit', name: 'submitBtn', value: submitBtnText, required: true });
