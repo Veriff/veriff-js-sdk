@@ -1,6 +1,6 @@
 {
   "name": "@veriff/js-sdk",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "description": "JavaScript SDK for Veriff identity verification",
   "main": "lib/veriff.js",
   "types": "lib/index.d.ts",
@@ -61,6 +61,7 @@
     "jasmine-core": "^3.9.0",
     "jest": "^27.1.0",
     "prettier": "^2.3.2",
+    "set-value": "^4.1.0",
     "sinon": "^11.1.2",
     "source-map-loader": "^3.0.0",
     "style-loader": "^3.2.1",
