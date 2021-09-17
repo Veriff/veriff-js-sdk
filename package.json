@@ -1,9 +1,9 @@
 {
   "name": "@veriff/js-sdk",
-  "version": "1.1.1",
+  "version": "1.2.0",
   "description": "JavaScript SDK for Veriff identity verification",
   "main": "lib/veriff.js",
-  "types": "lib/src/index.d.ts",
+  "types": "lib/index.d.ts",
   "scripts": {
     "build": "webpack --config webpack/webpack.config.js --mode production",
     "dev": "webpack --progress --colors --watch --config webpack/webpack.config.js",
@@ -13,7 +13,7 @@
   },
   "author": "Ilia Aphtsiauri <ilia@veriff.me> (https://github.com/iaptsiauri)",
   "contributors": [
-    "Maksim Tsvetkov <maksim.tsvetkov@veriff.com> (https://github.com/MaxFlower)"
+    "Maksim Kitsigin <maksim.kitsigin@veriff.com> (https://github.com/fixmk)"
   ],
   "keywords": [
     "veriff",
@@ -29,6 +29,7 @@
     "transform": {
       "^.+\\.(ts|tsx)$": "ts-jest"
     },
+    "testEnvironment": "jsdom",
     "testRegex": "(/__test__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?|ts?)$"
   },
   "prettier": {
@@ -42,34 +43,33 @@
   },
   "license": "ISC",
   "devDependencies": {
-    "@babel/preset-env": "^7.7.1",
-    "@types/jest": "^24.0.23",
-    "@typescript-eslint/eslint-plugin": "^2.9.0",
-    "@typescript-eslint/parser": "^2.9.0",
-    "awesome-typescript-loader": "^5.2.1",
+    "@babel/preset-env": "^7.15.4",
+    "@types/jest": "^27.0.1",
+    "@typescript-eslint/eslint-plugin": "^4.31.0",
+    "@typescript-eslint/parser": "^4.31.0",
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.3",
-    "babel-eslint": "^8.2.5",
-    "babel-loader": "^7.1.4",
-    "babel-plugin-add-module-exports": "^0.2.1",
+    "babel-eslint": "^10.1.0",
+    "babel-loader": "^8.2.2",
+    "babel-plugin-add-module-exports": "^1.0.4",
     "babel-preset-env": "^1.7.0",
-    "chai": "^4.1.2",
-    "css-loader": "^0.28.11",
-    "eslint": "^6.7.1",
-    "eslint-config-prettier": "^6.7.0",
-    "eslint-loader": "^1.9.0",
-    "jasmine-core": "^2.99.1",
-    "jest": "^24.9.0",
-    "prettier": "^1.19.1",
-    "sinon": "^4.5.0",
-    "source-map-loader": "^0.2.4",
-    "style-loader": "^0.21.0",
-    "ts-jest": "^24.2.0",
-    "typescript": "^3.7.2",
-    "webpack": "^4.41.2",
-    "webpack-cli": "^3.3.10",
-    "webpack-merge": "^4.2.2",
-    "yargs": "^11.1.0"
-  },
-  "dependencies": {}
+    "chai": "^4.3.4",
+    "css-loader": "^6.2.0",
+    "eslint": "^7.32.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-loader": "^4.0.2",
+    "jasmine-core": "^3.9.0",
+    "jest": "^27.1.0",
+    "prettier": "^2.3.2",
+    "sinon": "^11.1.2",
+    "source-map-loader": "^3.0.0",
+    "style-loader": "^3.2.1",
+    "ts-jest": "^27.0.5",
+    "ts-loader": "^9.2.5",
+    "typescript": "^4.4.2",
+    "webpack": "^5.52.0",
+    "webpack-cli": "^4.8.0",
+    "webpack-merge": "^5.8.0",
+    "yargs": "^17.1.1"
+  }
 }

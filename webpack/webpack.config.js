@@ -1,5 +1,5 @@
 const libraryName = 'Veriff';
-const merge = require('webpack-merge');
+const { merge } = require('webpack-merge');
 
 const baseConfig = {
     entry: './src/index.ts',
@@ -21,7 +21,7 @@ const umdConfig = merge(baseConfig, {
         rules: [
             {
                 test: /\.tsx?$/,
-                use: 'awesome-typescript-loader',
+                use: 'ts-loader',
                 exclude: /node_modules/,
             },
             {
@@ -44,7 +44,7 @@ const npmConfig = merge(baseConfig, {
         rules: [
             {
                 test: /\.tsx?$/,
-                use: 'awesome-typescript-loader',
+                use: 'ts-loader',
                 exclude: /node_modules/,
             },
             {
