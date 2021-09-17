@@ -3,3 +3,6 @@ src
 test
 node_modules
 webpack.config.js
+.idea
+.DS_Store
+.vscode
