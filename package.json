@@ -1,12 +1,12 @@
 {
   "name": "@veriff/js-sdk",
-  "version": "1.2.3",
+  "version": "1.2.4",
   "description": "JavaScript SDK for Veriff identity verification",
   "main": "lib/veriff.js",
   "types": "lib/index.d.ts",
   "scripts": {
     "build": "webpack --config webpack/webpack.config.js --mode production",
-    "dev": "webpack --progress --colors --watch --config webpack/webpack.config.js",
+    "dev": "webpack --progress --color --watch --config webpack/webpack.config.js",
     "test": "jest",
     "format": "prettier --write \"src/**/*.ts\" \"src/**/*.js\"",
     "lint": "eslint --ext=js,ts src"
