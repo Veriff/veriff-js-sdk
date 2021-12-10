@@ -1,11 +1,11 @@
-import { PersonData } from './template';
+import type { Params } from './interfaces';
 
 const CREATED_RESPONSE_STATUS = 201;
 
 export function createSession(
   host: string,
   apiKey: string,
-  data: { person?: PersonData; vendorData?: string },
+  data: Params,
   cb: (statusObject, resp) => void
 ): void {
   const url = `${host}/v1/sessions`;
@@ -40,6 +40,7 @@ export function createSession(
       },
       vendorData: data.vendorData,
       timestamp: new Date().toISOString(),
+      lang: data.lang,
     },
   };
 

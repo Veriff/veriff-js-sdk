@@ -1,31 +1,15 @@
 import './styles/style.css';
-import { createTemplate, PersonData, FormLabel } from './template';
+import { createTemplate } from './template';
 import { createSession } from './xhr';
+import { Options, VeriffSDKInstance, MountOptions, Params } from './interfaces';
 
-interface Options {
-  host?: string;
-  apiKey: string;
-  parentId: string;
-  onSession: (err, response) => void;
-}
-
-interface MountOptions {
-  formLabel?: FormLabel;
-  submitBtnText?: string;
-  loadingText?: string;
-}
-
-interface Params {
-  person?: PersonData;
-  vendorData?: string;
-}
-
-const Veriff = (options: Options) => {
-  const { host = 'https://api.veriff.me', apiKey, parentId, onSession } = options;
+const Veriff = (options: Options): VeriffSDKInstance => {
+  const { host = 'https://api.veriff.me', apiKey, parentId, onSession, lang } = options;
   const onSessionCallback = onSession;
   let mountedOptions: MountOptions = { loadingText: 'Loading...', submitBtnText: 'Start Verification' };
   let params: Params = {
     person: {},
+    lang,
   };
   let veriffForm: HTMLFormElement;
 
