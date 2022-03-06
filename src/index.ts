@@ -16,6 +16,7 @@ interface MountOptions {
 }
 
 interface Params {
+  callback?: string;
   person?: PersonData;
   vendorData?: string;
 }
@@ -37,6 +38,7 @@ const Veriff = (options: Options) => {
     form.onsubmit = (e) => {
       e.preventDefault();
 
+      const callback = params.callback;
       const givenName = veriffForm.givenName?.value || params.person.givenName;
       const lastName = veriffForm.lastName?.value || params.person.lastName;
       const idNumber = params.person?.idNumber;
@@ -47,7 +49,7 @@ const Veriff = (options: Options) => {
         throw new Error('Required parameters givenName or lastName is missing');
       }
 
-      setParams({ person: { givenName, lastName, idNumber }, vendorData });
+      setParams({ callback, person: { givenName, lastName, idNumber }, vendorData });
       form.submitBtn.value = loadingText;
       form.submitBtn.disabled = true;
       createSession(host, apiKey, params, (err, response) => {

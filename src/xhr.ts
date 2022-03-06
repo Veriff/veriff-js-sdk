@@ -5,7 +5,7 @@ const CREATED_RESPONSE_STATUS = 201;
 export function createSession(
   host: string,
   apiKey: string,
-  data: { person?: PersonData; vendorData?: string },
+  data: { callback?: string, person?: PersonData; vendorData?: string },
   cb: (statusObject, resp) => void
 ): void {
   const url = `${host}/v1/sessions`;
@@ -33,6 +33,7 @@ export function createSession(
 
   const body = {
     verification: {
+      callback: data.callback,
       person: {
         firstName: data.person.givenName,
         lastName: data.person.lastName,
