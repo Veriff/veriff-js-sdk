@@ -5,7 +5,7 @@ const CREATED_RESPONSE_STATUS = 201;
 export function createSession(
   host: string,
   apiKey: string,
-  data: { callback?: string, person?: PersonData; vendorData?: string },
+  data: { callback?: string; person?: PersonData; vendorData?: string },
   cb: (statusObject, resp) => void
 ): void {
   const url = `${host}/v1/sessions`;
