@@ -27,7 +27,8 @@ afterEach(() => {
 describe('Veriff create session', () => {
   it('should submit the verification data', (done) => {
     const responseData = JSON.stringify({ url: 'test' });
-    const requestData: { person?: IPersonData; vendorData?: string; env: string } = {
+    const requestData: { callback?: string, person?: IPersonData; vendorData?: string; env: string } = {
+      callback: 'https://veriff.com',
       person: {
         givenName: 'test',
         lastName: 'test',
