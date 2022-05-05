@@ -6,3 +6,4 @@ webpack.config.js
 .idea
 .DS_Store
 .vscode
+.npmrc
