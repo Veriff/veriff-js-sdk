@@ -26,7 +26,7 @@ or install it via a package manager
   const Veriff = require('@veriff/js-sdk');
 
   // ES6 style import
-  import Veriff from '@veriff/js-sdk';
+  import { Veriff } from '@veriff/js-sdk';
 
 ```
 
