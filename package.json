@@ -6,7 +6,7 @@
   "types": "lib/index.d.ts",
   "scripts": {
     "build": "webpack --config webpack/webpack.config.js --mode production",
-    "dev": "webpack --progress --colors --watch --config webpack/webpack.config.js",
+    "dev": "webpack --progress --mode=development --watch --config webpack/webpack.config.js",
     "test": "jest",
     "format": "prettier --write \"src/**/*.ts\" \"src/**/*.js\"",
     "lint": "eslint --ext=js,ts src"

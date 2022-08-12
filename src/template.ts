@@ -54,7 +54,7 @@ export function createLabel(value = '', labelFor) {
   label.setAttribute('class', `veriff-label`);
   label.setAttribute('id', `veriff-label-${camelCaseToSlug(labelFor)}`);
   label.setAttribute('htmlFor', labelFor);
-  label.innerHTML = value;
+  label.innerText = value;
   return label;
 }
 
