@@ -112,6 +112,12 @@ export function createTemplate(parentId: string, options: Options) {
   if (!parent) {
     throw new Error(`Element ${parentId} does not exists`);
   }
+
+  const fontLink = document.createElement('link');
+  fontLink.setAttribute('rel', 'stylesheet');
+  fontLink.setAttribute('href', 'https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap');
+  document.head.appendChild(fontLink);
+
   parent.innerHTML = '';
   const fragment = document.createDocumentFragment();
   const container = document.createElement('form');
