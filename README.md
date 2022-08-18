@@ -12,7 +12,7 @@ Veriff JS SDK, is a simple and customisable library which helps to integrate wit
 Include as a script tag: 
   
 ```html
-<script src='https://cdn.veriff.me/sdk/js/1.3/veriff.min.js'></script>
+<script src='https://cdn.veriff.me/sdk/js/1.4/veriff.min.js'></script>
 ```
 
 or install it via a package manager
