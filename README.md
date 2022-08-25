@@ -94,7 +94,7 @@ In case the Given name / Last name / Vendor Data or all of them are known, they 
       givenName: 'Foo',
       lastName: 'Bar'
     },
-    vendorData: 'example@mail.com'
+    vendorData: '7eb19312-79d6-11ec-90d6-0242ac120003'
   });
   veriff.mount({
     submitBtnText: 'Get verified'
@@ -125,7 +125,7 @@ It is possible to disable fields rendering without passing any data by not inclu
   });
 ```
 
-Additionally the input placeholder and button text value can be customised.
+Additionally, the input placeholder and button text value can be customised.
 
 ```javascript
   const veriff = Veriff({
@@ -139,10 +139,10 @@ Additionally the input placeholder and button text value can be customised.
     formLabel: {
       givenName: 'First name',
       lastName: 'Family name',
-      vendorData: 'Email'
+      vendorData: 'Data'
     },
     submitBtnText: 'Get verified',
     loadingText: 'Please wait...'
   });
 ```
-![alt text](https://cdn.veriff.me/assets/jssdk-custom-sample.png "Veriff JS SDK")
+![alt text](https://cdn.veriff.me/assets/jssdk-default-sample.png "Veriff JS SDK")
