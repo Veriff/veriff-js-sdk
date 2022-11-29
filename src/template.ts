@@ -72,7 +72,7 @@ export function createInputIfNeeded(opts: CreationOptions) {
     const inputLabel = createLabel(label, name);
     const input = createInput({ type: 'text', name, label, required });
     if (name === 'vendorData') {
-      input.setAttribute('maxlength', '400');
+      input.setAttribute('maxlength', '1000');
     }
 
     container.appendChild(inputLabel);
