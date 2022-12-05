@@ -12,7 +12,7 @@ Veriff JS SDK, is a simple and customisable library which helps to integrate wit
 Include as a script tag: 
   
 ```html
-<script src='https://cdn.veriff.me/sdk/js/1.4/veriff.min.js'></script>
+<script src='https://cdn.veriff.me/sdk/js/1.5/veriff.min.js'></script>
 ```
 
 or install it via a package manager
@@ -78,7 +78,7 @@ By default the following form will be rendered:
   }
 ```
 
-vendorData: string - Client specific data string, max 400 characters long, will be sent back unmodified using webhooks.
+vendorData: string - Client specific data string, max 1000 characters long, will be sent back unmodified using webhooks.
 In case the Given name / Last name / Vendor Data or all of them are known, they can be passed to the SDK, therefore text input fields will not be rendered.
 
 ```javascript
