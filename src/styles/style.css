@@ -46,7 +46,7 @@
 
 .veriff-text:focus {
   box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.1), 0px 0px 0px 1px rgba(0, 78, 95, 0.46),
-    0px 0px 0px 4px var(--genoma-colors-borderBrandHighlight);
+    0px 0px 0px 4px rgba(212, 250, 237, 1);
 }
 
 .veriff-submit {
