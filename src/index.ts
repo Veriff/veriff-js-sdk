@@ -85,4 +85,4 @@ const Veriff = (options: Options) => {
   };
 };
 
-export = Veriff;
+export default Veriff;
